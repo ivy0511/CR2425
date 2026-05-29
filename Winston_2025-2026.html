@@ -1,0 +1,2719 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head>
+<meta charset="utf-8">
+<title>中文成績單系統</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="rep-year" content="2025-2026">
+<meta name="rep-stu" content="陳藝升（Winston）">
+<meta name="rep-tea" content="李姿瑩（Ivy Lee）">
+<meta name="rep-cmt" content="這一年，藝升讓我最想為他喝采的，是期末作業的那段歷程。一開始他對自己沒有把握，甚至有點想退縮—但他沒有就這樣放棄。我們一起努力、一起練習，加上他自己私下不斷下功夫，最後他拿出了非常完美的表現。那一刻，我打從心底替他感到驕傲。對我來說，比起成果本身，他願意鼓起勇氣、撐過那段不安、然後超越自己的這份心，更值得肯定。
+他的閱讀能力也常常給我驚喜。有些連大人都覺得不容易的字，他都能讀得又穩又好。看著他一字一句把課文念出來，我總會想—這孩子的底子，遠比他自己以為的還要扎實。
+也要特別謝謝藝升的爸爸媽媽。這一年來，你們始終保持著密切的溝通，配合度非常高，讓老師在陪伴孩子的路上一點都不孤單。能遇到這樣用心的家庭，是我的榮幸。期待藝升帶著這次「原來我做得到」的信心，繼續勇敢往前走。
+
+What I most want to cheer 藝升 on for this year is the journey he went through with his final project. At first he wasn't sure of himself — he even wanted to pull back a little — but he didn't just give up. We worked at it together, practiced together, and with all the effort he put in on his own, he ended up turning in a really wonderful piece of work. In that moment, I felt so proud of him. For me, even more than the result itself, what means the most is the heart it took for him to find his courage, push through that uncertainty, and rise above what he thought he could do.
+His reading also surprises me again and again. There are characters that even adults would find tricky, and he reads them steadily and well. Watching him read a passage word by word, I often think to myself — this boy's foundation is far stronger than he gives himself credit for.
+I also want to give special thanks to 藝升's mom and dad. All year long you've kept up such close communication and have been so wonderfully cooperative — it's made me feel anything but alone in walking alongside your child. Getting to work with a family this caring has truly been my privilege. I can't wait to see 藝升 carry this new &quot;I really can do it&quot; confidence with him and keep moving bravely forward.">
+<script id="savedData" type="application/json"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="YRDZST%20Semibold-normal.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet">
+
+<style>
+@font-face{
+  font-family:'YRDZST Semibold';
+  src:url('YRDZST%20Semibold.ttf') format('truetype');
+  font-weight:normal;font-style:normal;
+}
+:root{
+  --main:#5f7d5a;
+  --main-dark:#3e5639;
+  --main-mid:#7d9970;
+  --accent:#d9c7a0;
+  --accent-light:#f0ead8;
+  --accent-soft:#faf8f0;
+  --bg:#ffffff;
+  --light:#f5f3ea;
+  --danger:#c77b6b;
+  --success:#5a9968;
+  --warning:#d4a256;
+  --info:#6f93a8;
+  --line24:#e5dcc2;
+  --line25:#a8bf9c;
+  --text-main:#34362d;
+  --text-sub:#6e705d;
+  --text-muted:#a5a594;
+  --border:#e6e1d2;
+  --shadow:rgba(95,125,90,.14);
+  --shadow-sm:rgba(95,125,90,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Sans TC','YRDZST Semibold',sans-serif;
+  background:var(--light);
+  color:var(--text-main);
+  line-height:1.65;
+  min-height:100vh;
+}
+
+/* ===== TOP HEADER ===== */
+.top-header{
+  background:linear-gradient(135deg,var(--main-dark) 0%,var(--main) 58%,var(--main-mid) 100%);
+  color:#fff;
+  padding:30px 36px 26px;
+  text-align:center;
+  position:relative;
+  box-shadow:0 6px 28px var(--shadow);
+  overflow:hidden;
+}
+.top-header::before{
+  content:'';
+  position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M40 20c-6 8-6 18 0 26 6-8 6-18 0-26zm0 4c3 5 3 13 0 18-3-5-3-13 0-18z'/%3E%3Ccircle cx='40' cy='44' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity:.7;
+}
+.top-header h1{
+  font-family:'Noto Serif TC',serif;
+  font-size:1.8rem;
+  letter-spacing:6px;
+  font-weight:700;
+  text-shadow:0 2px 14px rgba(0,0,0,.22);
+  position:relative;
+}
+.top-header .subtitle{
+  font-size:.86rem;
+  opacity:.82;
+  margin-top:7px;
+  letter-spacing:3px;
+  position:relative;
+  font-weight:300;
+}
+.top-header .subtitle::before,
+.top-header .subtitle::after{
+  content:'·';
+  margin:0 10px;
+  opacity:.6;
+}
+
+/* ===== CONTAINER ===== */
+.container{padding:26px 32px;max-width:1300px;margin:auto;}
+
+/* ===== INPUT CARD ===== */
+#inputPane{background:var(--light);}
+.input-card{
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 6px 30px var(--shadow-sm);
+  padding:30px 36px;
+  margin:24px 0;
+  border:1px solid var(--border);
+  position:relative;
+  overflow:hidden;
+}
+.input-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--main-mid),var(--accent));
+  opacity:.5;
+}
+.input-card-title{
+  font-family:'Noto Serif TC',serif;
+  font-size:1.1rem;
+  color:var(--main);
+  font-weight:700;
+  margin-bottom:22px;
+  padding-bottom:12px;
+  border-bottom:2px solid var(--accent-light);
+  display:flex;align-items:center;gap:10px;
+}
+.input-card-title .icon-dot{
+  width:6px;height:22px;
+  background:linear-gradient(180deg,var(--accent),var(--main));
+  border-radius:3px;flex-shrink:0;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:18px 28px;
+  margin-bottom:22px;
+}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group label{
+  font-size:.78rem;
+  color:var(--text-sub);
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.form-group input,
+.comment-group textarea{
+  padding:11px 15px;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  font-size:.96rem;
+  color:var(--text-main);
+  background:#fff;
+  font-family:inherit;
+  transition:border-color .2s,box-shadow .2s;
+}
+.form-group input:focus,
+.comment-group textarea:focus{
+  outline:none;
+  border-color:var(--main);
+  box-shadow:0 0 0 4px rgba(95,125,90,.09);
+}
+.comment-group{margin-bottom:0;}
+.comment-group + .upload-zone{margin-top:22px;}
+.comment-group label{
+  display:block;
+  font-size:.78rem;
+  color:var(--text-sub);
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.comment-group textarea{
+  width:100%;resize:vertical;min-height:85px;line-height:1.6;
+}
+.upload-zone{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 20px;
+  background:var(--accent-soft);
+  border-radius:12px;
+  border:2px dashed var(--accent);
+  transition:border-color .2s;
+}
+.upload-zone:hover{border-color:var(--main);}
+.upload-zone-icon{font-size:1.6rem;flex-shrink:0;}
+.upload-zone input[type=file]{
+  font-size:.9rem;color:var(--text-sub);
+  background:transparent;border:none;padding:0;cursor:pointer;flex:1;
+  font-family:inherit;
+}
+
+/* ===== BUTTONS ===== */
+.btn{
+  padding:10px 24px;
+  border:none;
+  border-radius:10px;
+  font-size:.94rem;
+  font-family:'Noto Sans TC',inherit;
+  cursor:pointer;
+  font-weight:700;
+  transition:all .2s;
+  display:inline-flex;align-items:center;gap:7px;
+  letter-spacing:.3px;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--main),var(--main-mid));
+  color:#fff;
+  box-shadow:0 3px 12px rgba(95,125,90,.32);
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(95,125,90,.38);
+  filter:brightness(1.05);
+}
+.btn-secondary{
+  background:linear-gradient(135deg,#bfc59a,var(--accent));
+  color:#fff;
+  box-shadow:0 3px 10px rgba(170,175,140,.5);
+}
+.btn-secondary:hover{filter:brightness(.97);transform:translateY(-1px);}
+.btn-outline{
+  background:#fff;color:var(--main);
+  border:1.5px solid var(--main);
+}
+.btn-outline:hover{background:var(--accent-light);}
+.btn-ghost{background:transparent;color:var(--text-sub);border:1.5px solid var(--border);}
+.btn-ghost:hover{background:var(--accent-light);color:var(--main);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none!important;filter:none!important;}
+
+/* ===== PREVIEW ===== */
+#previewPane{display:none;background:var(--bg);}
+.preview-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 2px 12px var(--shadow-sm);
+  margin-bottom:18px;
+  border:1px solid var(--border);
+}
+.preview-topbar h2{font-size:1.1rem;color:var(--main);font-family:'Noto Serif TC',serif;}
+.preview-hint{font-size:.82rem;color:var(--text-muted);}
+
+/* ===== DATATABLES OVERRIDE ===== */
+table.dataTable{
+  width:100%!important;
+  border-collapse:separate;
+  border-spacing:0;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 3px 16px var(--shadow);
+  border:1px solid var(--border);
+}
+table.dataTable thead th{
+  background:var(--main);color:#fff;
+  font-size:.9rem;font-weight:700;
+  padding:11px 13px;border-bottom:none;
+  letter-spacing:.3px;
+  white-space:nowrap;
+}
+table.dataTable tbody tr:nth-child(even){background:#faf8f0;}
+table.dataTable tbody tr:hover td{background:#f0ead8!important;}
+table.dataTable td{
+  font-size:.88rem;
+  border-bottom:1px solid #ece6d6;
+  padding:9px 13px;
+  vertical-align:middle;
+}
+table.dataTable tbody tr:last-child td{border-bottom:none;}
+.dataTables_wrapper .dataTables_filter{margin-bottom:10px;text-align:right;}
+.dataTables_wrapper .dataTables_filter input{
+  border:1.5px solid var(--border);border-radius:8px;
+  padding:7px 12px;font-family:inherit;font-size:.88rem;
+  color:var(--text-main);
+}
+.dataTables_wrapper .dataTables_filter input:focus{outline:none;border-color:var(--main);}
+.dataTables_length{display:none;}
+.dataTables_info{display:none;}
+
+/* Category separator row — only td:first-child is visible */
+.cat-row td{
+  padding:0!important;
+  border:none!important;
+  border-bottom:none!important;
+  height:0!important;
+  line-height:0!important;
+  font-size:0!important;
+  background:transparent!important;
+  overflow:hidden!important;
+}
+.cat-row td:first-child{
+  padding:6px 13px!important;
+  height:auto!important;
+  line-height:1.5!important;
+  font-size:.84rem!important;
+  font-weight:700!important;
+  letter-spacing:.5px!important;
+  background:linear-gradient(90deg,var(--accent-light),#faf8f0)!important;
+  color:var(--main)!important;
+  border-bottom:2px solid var(--accent)!important;
+}
+.cat-row:hover td:first-child{background:linear-gradient(90deg,var(--accent-light),#faf8f0)!important;}
+
+/* Score Badges */
+.score-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:38px;padding:3px 9px;
+  border-radius:20px;font-size:.84rem;font-weight:700;
+  letter-spacing:.3px;
+}
+.score-max{background:linear-gradient(135deg,#f5e4b0,#e8cd7a);color:#7a5d18;box-shadow:0 2px 6px rgba(255,200,0,.25);}
+.score-high{background:linear-gradient(135deg,#d2ecc8,#a8d894);color:#2e6b32;box-shadow:0 2px 6px rgba(90,153,104,.2);}
+.score-mid{background:linear-gradient(135deg,#dce8d6,#b4cca8);color:#3a5a44;box-shadow:0 2px 6px rgba(111,147,168,.2);}
+.score-low{background:linear-gradient(135deg,#f0d8cc,#e0b8a4);color:#a8503a;box-shadow:0 2px 6px rgba(199,123,107,.2);}
+.score-max::before{content:'★ ';}
+
+/* Progress badges */
+.prog-badge{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:.8rem;font-weight:700;padding:2px 7px;
+  border-radius:12px;
+}
+.prog-up{background:#e6f2e0;color:#3e7a42;}
+.prog-flat{background:#f0ead8;color:#888;}
+.prog-down{background:#f4e6de;color:#a8503a;}
+
+/* Min widths for Chinese columns */
+th:nth-child(3),td:nth-child(3),
+th:nth-child(5),td:nth-child(5){min-width:120px;word-break:keep-all;}
+th:nth-child(4),td:nth-child(4),
+th:nth-child(6),td:nth-child(6){min-width:160px;word-break:normal;}
+
+/* ===== REPORT PAGES ===== */
+.page{display:none;}
+
+.report-header{
+  background:linear-gradient(135deg,var(--main-dark) 0%,var(--main) 60%,var(--main-mid) 100%);
+  color:#fff;
+  padding:16px 28px 14px;
+  border-radius:16px;
+  margin-bottom:22px;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 4px 16px var(--shadow);
+  position:relative;overflow:hidden;
+}
+.report-header::after{
+  content:'';
+  position:absolute;right:-20px;top:-20px;
+  width:120px;height:120px;
+  border-radius:50%;
+  background:rgba(255,255,255,.07);
+}
+.report-header .rh-left{display:flex;flex-direction:column;gap:3px;position:relative;}
+.report-header .rh-student{
+  font-family:'Noto Serif TC',serif;
+  font-size:1.22rem;font-weight:700;letter-spacing:2px;
+}
+.report-header .rh-meta{font-size:.82rem;opacity:.85;letter-spacing:.5px;}
+.report-header .rh-right{text-align:right;position:relative;}
+.report-header .rh-page-title{font-weight:700;font-size:1rem;letter-spacing:1px;}
+.report-header .rh-page-num{font-size:.76rem;opacity:.7;margin-top:2px;}
+
+/* Section title */
+.section-title{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Noto Serif TC',serif;
+  font-size:1.08rem;color:var(--main);font-weight:700;
+  margin:22px 0 16px;
+}
+.section-title .st-bar{
+  width:5px;height:20px;
+  background:linear-gradient(180deg,var(--accent),var(--main));
+  border-radius:3px;flex-shrink:0;
+}
+
+/* ===== CHARTS PAGE ===== */
+.chart-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;margin:0;
+}
+.chart-card{
+  background:#fff;
+  border-radius:14px;
+  padding:20px 22px;
+  box-shadow:0 3px 16px var(--shadow-sm);
+  border:1px solid var(--border);
+}
+.chart-card.wide{grid-column:1/-1;}
+.chart-card-title{
+  font-size:.9rem;color:var(--main);font-weight:700;
+  margin-bottom:14px;
+  display:flex;align-items:center;gap:7px;
+  letter-spacing:.3px;
+}
+.chart-card-title .ct-icon{font-size:1rem;}
+canvas{width:100%!important;max-height:300px!important;}
+.tip{font-size:.8rem;text-align:center;color:var(--text-muted);margin-top:8px;font-style:italic;}
+.star{position:fixed;width:10px;height:10px;background:var(--accent);pointer-events:none;
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);}
+
+/* ===== SUMMARY PAGE ===== */
+.domain-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(148px,1fr));
+  gap:12px;margin:14px 0 24px;
+}
+.domain-card{
+  background:#fff;border-radius:14px;
+  padding:15px 16px;
+  box-shadow:0 2px 12px var(--shadow-sm);
+  text-align:center;
+  border:1px solid var(--border);
+  border-top:4px solid var(--main);
+  transition:transform .2s,box-shadow .2s;
+}
+.domain-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px var(--shadow);}
+.domain-card.high{border-top-color:var(--success);}
+.domain-card.mid{border-top-color:var(--info);}
+.domain-card.low{border-top-color:var(--warning);}
+.dc-cn{font-size:.8rem;color:var(--text-sub);margin-bottom:3px;font-weight:600;}
+.dc-score{font-size:2rem;font-weight:700;line-height:1.1;font-family:'Noto Serif TC',serif;}
+.dc-score.high{color:var(--success);}
+.dc-score.mid{color:var(--info);}
+.dc-score.low{color:var(--warning);}
+.dc-en{font-size:.7rem;color:var(--text-muted);margin-top:2px;}
+
+.result-box{
+  border-radius:14px;background:#fff;
+  box-shadow:0 2px 14px var(--shadow-sm);
+  margin:14px 0 18px;padding:18px 22px 16px;
+  border:1px solid var(--border);
+  border-left:5px solid var(--accent);
+}
+.result-box.strong-box{border-left-color:var(--success);}
+.result-box.weak-box{border-left-color:var(--warning);}
+.result-box-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:12px;
+}
+.result-box-header .rh-icon{font-size:1.2rem;}
+.result-box-header .rh-title{font-size:1rem;font-weight:700;color:var(--text-main);}
+.result-box-header .rh-note{font-size:.78rem;color:var(--text-muted);margin-left:auto;}
+.result-items{display:flex;flex-direction:column;gap:0;}
+.result-item{
+  display:flex;align-items:center;gap:12px;
+  padding:8px 0;
+  border-bottom:1px solid var(--accent-light);
+}
+.result-item:last-child{border-bottom:none;}
+.ri-name{min-width:115px;font-size:.88rem;color:var(--text-main);font-weight:500;}
+.ri-bar-wrap{flex:1;background:var(--light);border-radius:10px;height:7px;overflow:hidden;}
+.ri-bar-fill{height:100%;border-radius:10px;transition:width .8s cubic-bezier(.4,0,.2,1);}
+.ri-bar-high{background:linear-gradient(90deg,#7cc888,#3e8a4a);}
+.ri-bar-mid{background:linear-gradient(90deg,#8aae7e,#5a8052);}
+.ri-bar-low{background:linear-gradient(90deg,#e0b060,#c08428);}
+.ri-score{min-width:36px;text-align:right;font-weight:700;font-size:.88rem;}
+
+.cmt-box{
+  background:linear-gradient(135deg,var(--accent-soft),#fff);
+  border-radius:14px;
+  padding:22px 26px 20px;
+  margin-top:8px;
+  border:1px solid var(--accent);
+  position:relative;
+}
+.cmt-quote{
+  position:absolute;top:10px;left:16px;
+  font-size:3.5rem;
+  color:var(--accent);
+  font-family:Georgia,serif;
+  line-height:1;
+  user-select:none;
+  opacity:.8;
+}
+.cmt-text{
+  margin-left:28px;
+  font-size:.95rem;
+  line-height:1.8;
+  color:var(--text-main);
+}
+
+/* ===== STICKY NAV ===== */
+.nav-bar{
+  background:#fff;
+  padding:12px 28px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  box-shadow:0 -2px 16px var(--shadow-sm);
+  position:sticky;bottom:0;
+  border-top:1px solid var(--border);
+  z-index:100;
+}
+.page-dots{display:flex;gap:6px;align-items:center;margin:0 4px;}
+.page-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--border);cursor:pointer;
+  transition:all .25s ease;
+  border:none;padding:0;
+}
+.page-dot.active{background:var(--main);width:22px;border-radius:4px;}
+.page-dot:hover:not(.active){background:var(--main-mid);}
+
+/* ===== ENVELOPE (SVG-based for mobile reliability) ===== */
+#cover{
+  position:fixed;inset:0;
+  background:radial-gradient(ellipse at center,rgba(62,86,57,.9) 0%,rgba(30,42,26,.96) 100%);
+  display:none;align-items:center;justify-content:center;
+  z-index:9999;
+  backdrop-filter:blur(10px);
+  padding:20px;
+}
+.env-wrap{
+  display:flex;flex-direction:column;align-items:center;gap:22px;
+  animation:envFadeIn .6s cubic-bezier(.34,1.3,.64,1);
+  user-select:none;
+  width:100%;max-width:480px;
+}
+@keyframes envFadeIn{
+  from{opacity:0;transform:translateY(50px) scale(.88);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+.env-scene{cursor:pointer;width:100%;display:flex;justify-content:center;}
+.env-card{
+  position:relative;
+  width:100%;max-width:460px;
+  aspect-ratio: 460 / 300;
+  filter:drop-shadow(0 24px 55px rgba(0,0,0,.55));
+}
+.env-svg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  display:block;
+}
+/* Flap rotation — SVG <g> with transform-origin works on iOS Safari */
+.env-flap-g{
+  transform-origin:230px 0px;
+  transition:transform 1s cubic-bezier(.4,0,.2,1);
+}
+.env-card.open .env-flap-g{
+  transform:rotate(180deg) translateY(-160px);
+}
+.env-seal-svg{
+  transition:opacity .35s ease, transform .35s ease;
+  transform-origin:230px 140px;
+}
+.env-card.open .env-seal-svg{
+  opacity:0;
+  transform:scale(0);
+}
+/* Letter inside the envelope */
+.env-letter{
+  position:absolute;
+  left:8%;width:84%;
+  bottom:3%;height:78%;
+  background:linear-gradient(160deg,#fff 60%,#faf8f0 100%);
+  border-radius:6px 6px 3px 3px;
+  box-shadow:0 -3px 18px rgba(0,0,0,.2);
+  z-index:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:14px 18px;text-align:center;
+  transition:transform .7s cubic-bezier(.22,1,.36,1);
+}
+.env-letter::before{
+  content:'';position:absolute;left:0;right:0;top:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--main),var(--accent));
+  border-radius:6px 6px 0 0;
+}
+.env-letter .ltr-stamp{
+  position:absolute;top:8px;right:10px;
+  width:28px;height:34px;
+  background:linear-gradient(135deg,var(--accent-light),var(--accent));
+  border:1.5px solid var(--accent);border-radius:3px;
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.5);
+}
+.env-letter h2{
+  font-family:'Noto Serif TC',serif;
+  font-size:.95rem;color:var(--main);letter-spacing:2px;font-weight:700;margin-bottom:4px;
+}
+.env-letter .ltr-student{
+  font-size:1.05rem;font-weight:700;color:var(--text-main);margin:4px 0 2px;letter-spacing:1px;
+}
+.env-letter .ltr-hint{
+  font-size:.72rem;color:var(--text-muted);margin-top:8px;line-height:1.5;
+  animation:pulse 1.7s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.45;}50%{opacity:1;}}
+.env-card.open .env-letter{
+  transform:translateY(-25%);
+}
+.env-hint{
+  font-size:.78rem;color:rgba(255,255,255,.6);
+  letter-spacing:2px;text-transform:uppercase;
+  animation:pulse 2s ease-in-out infinite;
+  text-align:center;
+}
+/* Confetti */
+.confetti-piece{
+  position:fixed;width:9px;height:9px;border-radius:2px;
+  pointer-events:none;z-index:99999;
+  animation:confettiFall linear forwards;
+}
+@keyframes confettiFall{
+  0%  {transform:translateY(0) rotate(0deg) scale(1);opacity:1;}
+  85% {opacity:1;}
+  100%{transform:translateY(85vh) rotate(800deg) scale(.3);opacity:0;}
+}
+
+/* ===== EXAM PAGE ===== */
+.exam-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;margin:14px 0 22px;
+}
+.exam-card{
+  background:#fff;
+  border-radius:14px;
+  padding:18px 16px 16px;
+  box-shadow:0 3px 14px var(--shadow-sm);
+  border:1px solid var(--border);
+  border-top:4px solid var(--main);
+  text-align:center;
+  position:relative;
+  transition:transform .25s,box-shadow .25s;
+}
+.exam-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px var(--shadow);}
+.exam-card.tier-special  {border-top-color:#c9a84a;}  /* 特優 gold */
+.exam-card.tier-excellent{border-top-color:#5a9968;}  /* 優 green */
+.exam-card.tier-good     {border-top-color:#7d9970;}  /* 甲 sage */
+.exam-card.tier-fair     {border-top-color:#9aab7e;}  /* 乙 light sage */
+.exam-card.tier-pass     {border-top-color:#d4a256;}  /* 丙 amber */
+.exam-card.tier-fail     {border-top-color:#c77b6b;}  /* 丁 terracotta */
+.exam-card.empty{opacity:.55;border-top-color:#dde6cf;}
+.ec-period-cn{font-size:.78rem;font-weight:700;color:var(--text-sub);letter-spacing:.5px;margin-bottom:2px;}
+.ec-period-en{font-size:.65rem;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;}
+.ec-score{
+  font-size:2.4rem;font-weight:700;line-height:1;
+  font-family:'Noto Serif TC',serif;
+  margin-bottom:4px;
+}
+.ec-score.tier-special  {color:#a8902e;}
+.ec-score.tier-excellent{color:#3e7a42;}
+.ec-score.tier-good     {color:#4a7050;}
+.ec-score.tier-fair     {color:#6a8050;}
+.ec-score.tier-pass     {color:#b07828;}
+.ec-score.tier-fail     {color:#a8503a;}
+.ec-score-empty{font-size:1.6rem;color:#bbb;font-weight:400;}
+.ec-out-of{font-size:.7rem;color:var(--text-muted);}
+.ec-tier-badge{
+  display:inline-block;
+  margin-top:8px;padding:3px 12px;
+  border-radius:12px;
+  font-size:.78rem;font-weight:700;
+  letter-spacing:.5px;
+}
+.ec-tier-badge.tier-special  {background:#f5ecc8;color:#7a5d18;}
+.ec-tier-badge.tier-excellent{background:#dceccc;color:#2e6b32;}
+.ec-tier-badge.tier-good     {background:#dde6cf;color:#3a5a34;}
+.ec-tier-badge.tier-fair     {background:#e7eed9;color:#4a5e38;}
+.ec-tier-badge.tier-pass     {background:#f5e8d2;color:#8a5a24;}
+.ec-tier-badge.tier-fail     {background:#f4e2da;color:#8a4030;}
+.ec-delta{
+  margin-top:8px;font-size:.78rem;font-weight:700;
+}
+.ec-delta-up   {color:var(--success);}
+.ec-delta-down {color:var(--danger);}
+.ec-delta-flat {color:var(--text-muted);}
+.ec-delta-none {color:transparent;}
+
+.exam-trend-card{
+  background:#fff;border-radius:14px;
+  padding:20px 24px;margin-bottom:22px;
+  box-shadow:0 3px 16px var(--shadow-sm);
+  border:1px solid var(--border);
+}
+.exam-trend-card canvas{max-height:260px!important;}
+
+.exam-summary{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
+  background:linear-gradient(135deg,var(--accent-soft),#fff);
+  border-radius:14px;
+  padding:22px 26px;
+  border:1px solid var(--accent);
+  margin-bottom:8px;
+}
+.es-stat{
+  text-align:center;
+  padding:8px 12px;
+  border-right:1px solid rgba(232,200,222,.5);
+}
+.es-stat:last-child{border-right:none;}
+.es-stat-label{
+  font-size:.72rem;color:var(--text-sub);font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;
+}
+.es-stat-value{
+  font-size:1.7rem;font-weight:700;
+  font-family:'Noto Serif TC',serif;color:var(--main);line-height:1.1;
+}
+.es-stat-value.up{color:var(--success);}
+.es-stat-value.down{color:var(--danger);}
+.es-stat-sub{font-size:.7rem;color:var(--text-muted);margin-top:3px;}
+
+@media (max-width:768px){
+  .exam-grid{grid-template-columns:1fr 1fr;}
+  .es-stat{border-right:none;border-bottom:1px solid rgba(232,200,222,.5);padding-bottom:14px;}
+  .es-stat:last-child{border-bottom:none;}
+}
+
+/* Parent mode: hide all editing UI */
+body.parent-mode #inputPane,
+body.parent-mode #previewPane,
+body.parent-mode #htmlBtn,
+body.parent-mode .top-header{display:none!important;}
+/* Show envelope cover by default in parent-mode (no FOUC).
+   No `!important` so JS can hide it on click. */
+body.parent-mode #cover{display:flex;}
+
+/* ===== PRINT ===== */
+@media print{
+  body{background:#fff;}
+  .container{max-width:100%;padding:10px 14px;}
+  .nav-bar,#inputPane,#previewPane{display:none!important;}
+  .page{display:block!important;}
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .chart-grid{grid-template-columns:1fr;}
+  .chart-card.wide{grid-column:auto;}
+}
+@media(max-width:768px){
+  .top-header h1{font-size:1.35rem;letter-spacing:3px;}
+  .form-grid{grid-template-columns:1fr 1fr;}
+  .container{padding:16px 18px;}
+  .report-header{flex-direction:column;gap:8px;align-items:flex-start;}
+  .domain-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
+  .nav-bar{gap:6px;padding:10px 14px;flex-wrap:wrap;justify-content:center;}
+
+  /* ─── Mobile: transform tables into CARD layout ─── */
+  #tbl1, #tbl2 { display:block; box-shadow:none; border:none; }
+  #tbl1 thead, #tbl2 thead { display:none; }    /* Hide table header on mobile */
+  #tbl1 tbody, #tbl2 tbody { display:block; }
+  #tbl1 tbody tr, #tbl2 tbody tr {
+    display:block;
+    background:#fff;
+    border-radius:12px;
+    padding:14px 16px;
+    margin-bottom:12px;
+    box-shadow:0 2px 10px var(--shadow-sm);
+    border:1px solid var(--border);
+  }
+  #tbl1 tbody tr:nth-child(even),
+  #tbl2 tbody tr:nth-child(even){background:#fff;}
+  #tbl1 tbody tr.cat-row, #tbl2 tbody tr.cat-row {
+    background:transparent;
+    box-shadow:none;border:none;padding:0;
+    margin:18px 0 8px 0;
+  }
+  #tbl1 tbody tr.cat-row td, #tbl2 tbody tr.cat-row td { display:none; }
+  #tbl1 tbody tr.cat-row td:first-child, #tbl2 tbody tr.cat-row td:first-child {
+    display:block !important;
+    padding:8px 12px !important;height:auto !important;
+    background:linear-gradient(90deg,var(--accent-light),#faf8f0)!important;
+    border-radius:8px;
+    border-bottom:none !important;
+    font-size:.9rem !important;
+  }
+  #tbl1 tbody tr td, #tbl2 tbody tr td {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:6px 0;
+    border-bottom:1px solid #f0ead8;
+    text-align:right;
+    word-break:break-word;
+  }
+  #tbl1 tbody tr td:last-child,
+  #tbl2 tbody tr td:last-child { border-bottom:none; }
+  /* Show pseudo-labels (column names) on left of each cell */
+  #tbl1 tbody tr:not(.cat-row) td::before,
+  #tbl2 tbody tr:not(.cat-row) td::before {
+    content:attr(data-label);
+    font-size:.72rem;color:var(--text-sub);
+    font-weight:600;letter-spacing:.3px;
+    flex:0 0 38%;text-align:left;
+    word-break:keep-all;
+  }
+  /* The indicator name (first cell after cat-row col 0/1) becomes a "title" row */
+  #tbl1 tbody tr:not(.cat-row) td:nth-child(3),
+  #tbl2 tbody tr:not(.cat-row) td:nth-child(3) {
+    display:block;
+    font-size:1rem;font-weight:700;color:var(--main);
+    text-align:left;
+    border-bottom:2px solid var(--accent-light);
+    padding-bottom:8px;margin-bottom:8px;
+  }
+  #tbl1 tbody tr:not(.cat-row) td:nth-child(3)::before,
+  #tbl2 tbody tr:not(.cat-row) td:nth-child(3)::before { display:none; }
+  /* English indicator below in small text */
+  #tbl1 tbody tr:not(.cat-row) td:nth-child(4),
+  #tbl2 tbody tr:not(.cat-row) td:nth-child(4) {
+    display:block;
+    font-size:.78rem;color:var(--text-muted);font-style:italic;
+    text-align:left;border-bottom:1px solid #f0ead8;padding-bottom:8px;margin-bottom:8px;
+  }
+  #tbl1 tbody tr:not(.cat-row) td:nth-child(4)::before,
+  #tbl2 tbody tr:not(.cat-row) td:nth-child(4)::before { display:none; }
+  /* Hide description columns on mobile to save space */
+  #tbl1 tbody tr:not(.cat-row) td:nth-child(5),
+  #tbl2 tbody tr:not(.cat-row) td:nth-child(5),
+  #tbl1 tbody tr:not(.cat-row) td:nth-child(6),
+  #tbl2 tbody tr:not(.cat-row) td:nth-child(6) {
+    display:none;
+  }
+  /* Hide search box on mobile (saves space) */
+  .dataTables_wrapper .dataTables_filter { display:none; }
+
+  /* Exam page cards: 2 columns on mobile */
+  .exam-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .ec-score{font-size:1.8rem;}
+  .ec-period-cn{font-size:.7rem;}
+  .ec-period-en{font-size:.58rem;}
+  .ec-tier-badge{font-size:.7rem;padding:2px 9px;}
+
+  /* Chart page: stack vertically on mobile */
+  .chart-grid{grid-template-columns:1fr;}
+  .chart-card{padding:14px 12px;}
+
+  /* Exam summary: stack rows on mobile */
+  .exam-summary{padding:14px 16px;}
+}
+
+@media(max-width:480px){
+  .form-grid{grid-template-columns:1fr;}
+  .input-card{padding:20px 18px;}
+  .exam-grid{grid-template-columns:1fr 1fr;}
+  .env-letter h2{font-size:.85rem;letter-spacing:1.5px;}
+  .env-letter .ltr-student{font-size:.95rem;}
+}
+</style>
+</head>
+<body class="parent-mode">
+
+<!-- TOP HEADER -->
+<div class="top-header">
+  <h1>🌿 中文成績單系統</h1>
+  <div class="subtitle">Chinese Language Report Card System</div>
+</div>
+
+<!-- ===== 資料輸入區 ===== -->
+
+
+<!-- ===== CSV 預覽頁 ===== -->
+
+
+<!-- ===== 成績單：定期評量成績（新增第一頁） ===== -->
+<div id="page-0" class="page" style="display: block;">
+<div class="container">
+  <div class="report-header" style="">
+    <div class="rh-left">
+      <div class="rh-student" id="phStu0">陳藝升（Winston）</div>
+      <div class="rh-meta">學年度：<span id="phYear0">2025-2026</span>　指導教師：<span id="phTea0">李姿瑩（Ivy Lee）</span></div>
+    </div>
+    <div class="rh-right">
+      <div class="rh-page-title">定期評量成績</div>
+      <div class="rh-page-num">Term Examinations · 第 1 頁，共 5 頁</div>
+    </div>
+  </div>
+  <div class="section-title"><div class="st-bar"></div>四次考試成績 Four-Term Exam Results</div>
+  <div id="examCards" class="exam-grid"></div>
+
+  <div class="section-title"><div class="st-bar"></div>學期成長趨勢 Growth Trajectory</div>
+  <div class="exam-trend-card">
+    <canvas id="cvExamTrend" style=""></canvas>
+  </div>
+
+  <div class="section-title"><div class="st-bar"></div>學年度成果摘要 Academic Year Summary</div>
+  <div id="examSummary" class="exam-summary"></div>
+</div>
+</div>
+
+<!-- ===== 成績單：成績表（上） ===== -->
+<div id="page-1" class="page" style="display: none;">
+<div class="container">
+  <div class="report-header">
+    <div class="rh-left">
+      <div class="rh-student" id="phStu1">陳藝升（Winston）</div>
+      <div class="rh-meta">學年度：<span id="phYear1">2025-2026</span>　指導教師：<span id="phTea1">李姿瑩（Ivy Lee）</span></div>
+    </div>
+    <div class="rh-right">
+      <div class="rh-page-title">評量成績表（上）</div>
+      <div class="rh-page-num">Assessment (Part 1) · 第 2 頁，共 5 頁</div>
+    </div>
+  </div>
+  <div class="section-title"><div class="st-bar"></div>各項評量指標成績（前半段） Indicators (Part 1)</div>
+  <table id="tbl1" class="display">
+    <thead><tr>
+      <th>範疇</th><th>Category</th><th>評量指標</th><th>Indicator</th>
+      <th>核心說明</th><th>Description</th>
+      <th>2025</th><th>2026</th><th>進步%</th><th>2027目標</th>
+    </tr></thead><tbody></tbody>
+  </table>
+</div>
+</div>
+
+<!-- ===== 成績單：成績表（下） ===== -->
+<div id="page-2" class="page" style="display: none;">
+<div class="container">
+  <div class="report-header">
+    <div class="rh-left">
+      <div class="rh-student" id="phStu2">陳藝升（Winston）</div>
+      <div class="rh-meta">學年度：<span id="phYear2">2025-2026</span>　指導教師：<span id="phTea2">李姿瑩（Ivy Lee）</span></div>
+    </div>
+    <div class="rh-right">
+      <div class="rh-page-title">評量成績表（下）</div>
+      <div class="rh-page-num">Assessment (Part 2) · 第 3 頁，共 5 頁</div>
+    </div>
+  </div>
+  <div class="section-title"><div class="st-bar"></div>各項評量指標成績（後半段） Indicators (Part 2)</div>
+  <table id="tbl2" class="display">
+    <thead><tr>
+      <th>範疇</th><th>Category</th><th>評量指標</th><th>Indicator</th>
+      <th>核心說明</th><th>Description</th>
+      <th>2025</th><th>2026</th><th>進步%</th><th>2027目標</th>
+    </tr></thead><tbody></tbody>
+  </table>
+</div>
+</div>
+
+<!-- ===== 成績單：圖表分析 ===== -->
+<div id="page-3" class="page" style="display: none;">
+<div class="container">
+  <div class="report-header">
+    <div class="rh-left">
+      <div class="rh-student" id="phStu3">陳藝升（Winston）</div>
+      <div class="rh-meta">學年度：<span id="phYear3">2025-2026</span>　指導教師：<span id="phTea3">李姿瑩（Ivy Lee）</span></div>
+    </div>
+    <div class="rh-right">
+      <div class="rh-page-title">成績圖表分析</div>
+      <div class="rh-page-num">Visual Analysis · 第 4 頁，共 5 頁</div>
+    </div>
+  </div>
+  <div class="section-title"><div class="st-bar"></div>學習成果視覺化 Learning Outcomes Visualization</div>
+  <div class="chart-grid">
+    <div class="chart-card wide">
+      <div class="chart-card-title"><span class="ct-icon">📊</span>2026 各項指標得分</div>
+      <canvas id="cvBar" style=""></canvas>
+      <p class="tip">💡 點擊圖表可重新播放動畫；★ Max 目標項目會閃粉並灑星星</p>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title"><span class="ct-icon">📈</span>2025 vs 2026 趨勢比較</div>
+      <canvas id="cvLine" style=""></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title"><span class="ct-icon">🕸</span>各範疇均分雷達圖</div>
+      <canvas id="cvRadar" style=""></canvas>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== 成績單：總結分析（含教師評語） ===== -->
+<div id="page-4" class="page" style="display: none;">
+<div class="container">
+  <div class="report-header">
+    <div class="rh-left">
+      <div class="rh-student" id="phStu4">陳藝升（Winston）</div>
+      <div class="rh-meta">學年度：<span id="phYear4">2025-2026</span>　指導教師：<span id="phTea4">李姿瑩（Ivy Lee）</span></div>
+    </div>
+    <div class="rh-right">
+      <div class="rh-page-title">總結分析</div>
+      <div class="rh-page-num">Summary · 第 5 頁，共 5 頁</div>
+    </div>
+  </div>
+  <div class="section-title"><div class="st-bar"></div>各範疇平均分數 Domain Average Scores</div>
+  <div id="domainCards" class="domain-grid"></div>
+  <div id="strongBox" class="result-box strong-box"></div>
+  <div id="weakBox" class="result-box weak-box"></div>
+  <div class="section-title"><div class="st-bar"></div>教師評語 Teacher's Comment</div>
+  <div class="cmt-box">
+    <div class="cmt-quote">"</div>
+    <div class="cmt-text" id="teacherCmt"></div>
+  </div>
+</div>
+</div>
+
+<!-- ===== STICKY NAV ===== -->
+<div class="nav-bar">
+  <button class="btn btn-outline" id="prevBtn" disabled="">← 上一頁</button>
+  <div class="page-dots" id="pageDots"></div>
+  <button class="btn btn-outline" id="nextBtn">下一頁 →</button>
+  <button class="btn btn-primary" id="pdfBtn">⬇ 下載 PDF</button>
+  
+</div>
+
+<!-- ===== ENVELOPE ===== -->
+<div id="cover" style="display: none;">
+  <div class="env-wrap">
+    <div class="env-scene" id="envScene">
+      <div class="env-card" id="env" style="">
+        <!-- Letter peeks out from envelope (z-index: 1) -->
+        <div class="env-letter">
+          <div class="ltr-stamp">🌱</div>
+          <h2 id="coverTitle">2025-2026 Final Report</h2>
+          <div class="ltr-student" id="coverStu">陳藝升（Winston）</div>
+          <div class="ltr-hint">✉ 點擊信封開啟成績單<br><span style="font-size:.7em;opacity:.8">Tap envelope to open</span></div>
+        </div>
+        <!-- Envelope rendered as SVG (rock-solid on mobile) -->
+        <svg class="env-svg" viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="env-grad-body" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e0e8d2"></stop>
+              <stop offset="100%" stop-color="#a8c096"></stop>
+            </linearGradient>
+            <linearGradient id="env-grad-flap" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#dde6cf"></stop>
+              <stop offset="100%" stop-color="#a8c096"></stop>
+            </linearGradient>
+            <linearGradient id="env-grad-left" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#b6c8a4"></stop>
+              <stop offset="100%" stop-color="#cdd9bd"></stop>
+            </linearGradient>
+            <linearGradient id="env-grad-right" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#cdd9bd"></stop>
+              <stop offset="100%" stop-color="#9eb88c"></stop>
+            </linearGradient>
+            <radialGradient id="env-seal-grad" cx="0.38" cy="0.33" r="0.7">
+              <stop offset="0%" stop-color="#7d9970"></stop>
+              <stop offset="70%" stop-color="#3e5639"></stop>
+            </radialGradient>
+            <filter id="env-shadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="3"></feGaussianBlur>
+              <feOffset dx="0" dy="2" result="off"></feOffset>
+              <feComponentTransfer><feFuncA type="linear" slope="0.3"></feFuncA></feComponentTransfer>
+              <feMerge><feMergeNode></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+            </filter>
+          </defs>
+          <!-- Body back -->
+          <rect x="0" y="0" width="460" height="300" rx="10" fill="url(#env-grad-body)"></rect>
+          <!-- Left triangle flap -->
+          <polygon points="0,0 230,150 0,300" fill="url(#env-grad-left)"></polygon>
+          <!-- Right triangle flap -->
+          <polygon points="460,0 230,150 460,300" fill="url(#env-grad-right)"></polygon>
+          <!-- Bottom triangle -->
+          <polygon points="0,300 230,150 460,300" fill="#9eb88c"></polygon>
+          <!-- Fold-line shine -->
+          <line x1="20" y1="150" x2="440" y2="150" stroke="rgba(255,255,255,.25)" stroke-width="1"></line>
+          <!-- Top flap (will animate) -->
+          <g class="env-flap-g">
+            <polygon points="0,0 230,162 460,0" fill="url(#env-grad-flap)"></polygon>
+            <line x1="230" y1="0" x2="230" y2="160" stroke="rgba(255,255,255,.35)" stroke-width="1"></line>
+          </g>
+          <!-- Wax seal -->
+          <circle class="env-seal-svg" cx="230" cy="140" r="22" fill="url(#env-seal-grad)" filter="url(#env-shadow)"></circle>
+          <text class="env-seal-svg" x="230" y="148" text-anchor="middle" font-size="20" font-family="serif">🌿</text>
+        </svg>
+      </div>
+    </div>
+    <div class="env-hint">點擊開啟 · Click to open</div>
+  </div>
+</div>
+<!-- Hidden PDF render container (off-screen, A4-sized pages) -->
+<div id="pdf-render" style="position: fixed; left: -9999px; top: 0px; width: 794px; background: rgb(255, 255, 255); font-family: &quot;Noto Sans TC&quot;, &quot;YRDZST Semibold&quot;, sans-serif; color: rgb(52, 54, 45); display: none;"></div>
+<style>
+/* ===== PDF RENDER STYLES (only used inside #pdf-render) ===== */
+#pdf-render{font-size:13px;line-height:1.6;}
+.pdf-page{
+  width:794px;min-height:1123px;
+  background:#fff;
+  display:flex;flex-direction:column;
+  position:relative;
+}
+/* Cover page */
+.pdf-cover{
+  width:794px;height:1123px;
+  background:linear-gradient(160deg,#3e5639 0%,#5f7d5a 45%,#7d9970 100%);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  color:#fff;
+}
+.pdf-cover::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M0 0h40v40H0zm40 40h40v40H40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.pdf-cover .cv-deco-top{
+  position:absolute;top:-60px;right:-60px;
+  width:280px;height:280px;border-radius:50%;
+  background:rgba(255,255,255,.06);
+}
+.pdf-cover .cv-deco-bot{
+  position:absolute;bottom:-80px;left:-80px;
+  width:320px;height:320px;border-radius:50%;
+  background:rgba(255,255,255,.05);
+}
+.pdf-cover .cv-inner{
+  position:relative;z-index:1;
+  text-align:center;padding:0 70px;
+  display:flex;flex-direction:column;align-items:center;gap:0;
+}
+.pdf-cover .cv-badge{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:30px;
+  padding:6px 22px;
+  font-size:11px;letter-spacing:3px;
+  margin-bottom:32px;text-transform:uppercase;
+}
+.pdf-cover .cv-title-cn{
+  font-size:36px;font-weight:700;letter-spacing:8px;
+  margin-bottom:8px;
+  text-shadow:0 4px 20px rgba(0,0,0,.3);
+}
+.pdf-cover .cv-title-en{
+  font-size:16px;letter-spacing:4px;opacity:.75;
+  margin-bottom:48px;
+}
+.pdf-cover .cv-divider{
+  width:60px;height:3px;
+  background:linear-gradient(90deg,transparent,#d9c7a0,transparent);
+  border-radius:2px;margin-bottom:48px;
+}
+.pdf-cover .cv-info-box{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:16px;
+  padding:28px 48px;
+  min-width:360px;
+  display:flex;flex-direction:column;gap:14px;
+  text-align:left;
+}
+.pdf-cover .cv-info-row{
+  display:flex;align-items:baseline;gap:12px;
+}
+.pdf-cover .cv-info-label{
+  font-size:10px;letter-spacing:2px;opacity:.6;
+  min-width:60px;text-transform:uppercase;
+}
+.pdf-cover .cv-info-val{
+  font-size:16px;font-weight:700;letter-spacing:1px;
+}
+.pdf-cover .cv-footer{
+  position:absolute;bottom:40px;left:0;right:0;
+  text-align:center;font-size:11px;opacity:.4;letter-spacing:2px;
+}
+/* Content page header */
+.pdf-hdr{
+  width:100%;height:52px;
+  background:linear-gradient(135deg,#3e5639 0%,#5f7d5a 55%,#7d9970 100%);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;color:#fff;flex-shrink:0;
+}
+.pdf-hdr .ph-left{display:flex;flex-direction:column;gap:1px;}
+.pdf-hdr .ph-name{font-size:14px;font-weight:700;letter-spacing:1.5px;}
+.pdf-hdr .ph-sub{font-size:10px;opacity:.7;letter-spacing:.5px;}
+.pdf-hdr .ph-right{text-align:right;}
+.pdf-hdr .ph-sec{font-size:13px;font-weight:700;letter-spacing:.5px;}
+.pdf-hdr .ph-pg{font-size:10px;opacity:.65;margin-top:2px;}
+/* Content area */
+.pdf-body{
+  flex:1;padding:22px 32px 0;
+  display:flex;flex-direction:column;
+}
+.pdf-section-title{
+  font-size:13px;font-weight:700;color:#5f7d5a;
+  letter-spacing:.5px;
+  margin:0 0 14px;
+  padding-bottom:7px;
+  border-bottom:2px solid #d9c7a0;
+  display:flex;align-items:center;gap:8px;
+}
+.pdf-section-title::before{
+  content:'';display:inline-block;
+  width:4px;height:14px;
+  background:linear-gradient(180deg,#d9c7a0,#5f7d5a);
+  border-radius:2px;flex-shrink:0;
+}
+/* PDF table — fixed layout, columns sum ≤ 738px (794 − 56 padding) */
+.pdf-table{
+  width:738px;max-width:738px;
+  table-layout:fixed;
+  border-collapse:collapse;
+  font-size:10.5px;border-radius:8px;overflow:hidden;
+  box-shadow:0 2px 8px rgba(95,125,90,.1);
+  border:1px solid #e6e1d2;
+}
+.pdf-table colgroup col:nth-child(1){width:68px;}   /* 評量指標 */
+.pdf-table colgroup col:nth-child(2){width:80px;}   /* Indicator */
+.pdf-table colgroup col:nth-child(3){width:110px;}  /* 核心說明 */
+.pdf-table colgroup col:nth-child(4){width:155px;}  /* Description */
+.pdf-table colgroup col:nth-child(5){width:45px;}   /* 2024 */
+.pdf-table colgroup col:nth-child(6){width:45px;}   /* 2025 */
+.pdf-table colgroup col:nth-child(7){width:58px;}   /* 進步% */
+.pdf-table colgroup col:nth-child(8){width:52px;}   /* 2026目標 */
+.pdf-table thead th{
+  background:#5f7d5a;color:#fff;
+  padding:7px 7px;font-size:9.5px;font-weight:700;
+  text-align:left;letter-spacing:.2px;
+  white-space:normal;word-break:keep-all;overflow:hidden;
+}
+.pdf-table tbody tr:nth-child(even){background:#faf8f0;}
+.pdf-table tbody tr.pdf-cat-row td{
+  background:linear-gradient(90deg,#f0ead8,#faf8f0);
+  color:#5f7d5a;font-weight:700;font-size:9.5px;
+  padding:5px 8px;border-bottom:1.5px solid #d9c7a0;
+  letter-spacing:.4px;white-space:normal;overflow:hidden;
+}
+.pdf-table td{
+  padding:6px 7px;border-bottom:1px solid #ece6d6;
+  vertical-align:middle;line-height:1.4;
+  word-break:normal;overflow-wrap:break-word;overflow:hidden;
+}
+.pdf-table tbody tr:last-child td{border-bottom:none;}
+/* Score badges in PDF */
+.pdf-score{
+  display:inline-block;padding:2px 8px;border-radius:12px;
+  font-weight:700;font-size:10px;text-align:center;min-width:32px;
+}
+.pdf-score-max{background:#f5e4b0;color:#7a5d18;}
+.pdf-score-high{background:#d2ecc8;color:#2e6b32;}
+.pdf-score-mid{background:#dce8d6;color:#2e5436;}
+.pdf-score-low{background:#f0d8cc;color:#8a4030;}
+.pdf-prog-up{color:#3e7a42;font-weight:700;}
+.pdf-prog-flat{color:#888;}
+.pdf-prog-down{color:#a8503a;font-weight:700;}
+/* Page footer */
+.pdf-ftr{
+  width:100%;height:36px;
+  border-top:1px solid #e6e1d2;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;
+  font-size:9.5px;color:#a5a594;
+  flex-shrink:0;margin-top:auto;
+}
+.pdf-ftr .pf-mid{text-align:center;flex:1;}
+/* Chart page */
+.pdf-chart-wrap{display:flex;flex-direction:column;gap:18px;padding:4px 0;}
+.pdf-chart-box{
+  background:#fff;border-radius:10px;
+  border:1px solid #e6e1d2;
+  padding:14px 18px;
+  box-shadow:0 1px 6px rgba(95,125,90,.07);
+}
+.pdf-chart-label{
+  font-size:10px;font-weight:700;color:#5f7d5a;
+  margin-bottom:10px;letter-spacing:.3px;
+}
+/* Summary page */
+.pdf-domain-grid{
+  display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;
+}
+.pdf-domain-card{
+  background:#fff;border-radius:10px;padding:10px 14px;
+  border:1px solid #e6e1d2;border-top:3px solid #5f7d5a;
+  text-align:center;min-width:90px;
+  box-shadow:0 1px 5px rgba(95,125,90,.07);
+}
+.pdf-domain-card.high{border-top-color:#5a9968;}
+.pdf-domain-card.mid{border-top-color:#6f93a8;}
+.pdf-domain-card.low{border-top-color:#d4a256;}
+.pdf-dc-cn{font-size:9px;color:#6e705d;font-weight:700;margin-bottom:3px;}
+.pdf-dc-score{font-size:20px;font-weight:700;}
+.pdf-dc-score.high{color:#5a9968;}
+.pdf-dc-score.mid{color:#6f93a8;}
+.pdf-dc-score.low{color:#d4a256;}
+.pdf-dc-en{font-size:8px;color:#a5a594;margin-top:2px;}
+/* Result items in summary */
+.pdf-result-section{
+  background:#fff;border-radius:10px;
+  border:1px solid #e6e1d2;padding:14px 16px;
+  margin-bottom:14px;
+  box-shadow:0 1px 5px rgba(95,125,90,.07);
+}
+.pdf-result-section.strong{border-left:4px solid #5a9968;}
+.pdf-result-section.weak{border-left:4px solid #d4a256;}
+.pdf-result-hdr{
+  font-size:11px;font-weight:700;margin-bottom:10px;
+  display:flex;align-items:center;gap:6px;color:#34362d;
+}
+.pdf-result-hdr .rh-badge{
+  font-size:9px;color:#6e705d;font-weight:400;margin-left:auto;
+}
+.pdf-ri{
+  display:flex;align-items:center;gap:10px;
+  padding:5px 0;border-bottom:1px solid #f0ead8;
+}
+.pdf-ri:last-child{border-bottom:none;}
+.pdf-ri-name{min-width:90px;font-size:10px;color:#34362d;font-weight:500;}
+.pdf-ri-bar{flex:1;background:#ece6d6;border-radius:6px;height:6px;overflow:hidden;}
+.pdf-ri-fill{height:100%;border-radius:6px;}
+.pdf-ri-fill.high{background:linear-gradient(90deg,#7cc888,#3e8a4a);}
+.pdf-ri-fill.mid{background:linear-gradient(90deg,#8aae7e,#5a8052);}
+.pdf-ri-fill.low{background:linear-gradient(90deg,#e0b060,#c08428);}
+.pdf-ri-score{min-width:28px;text-align:right;font-weight:700;font-size:10px;}
+/* Teacher comment */
+.pdf-cmt-box{
+  background:linear-gradient(135deg,#faf8f0,#fff);
+  border-radius:10px;padding:16px 20px 14px;
+  border:1px solid #d9c7a0;
+  position:relative;margin-top:4px;
+}
+.pdf-cmt-q{
+  position:absolute;top:6px;left:12px;
+  font-size:32px;color:#d9c7a0;font-family:Georgia,serif;
+  line-height:1;
+}
+.pdf-cmt-text{
+  margin-left:22px;font-size:11px;line-height:1.75;color:#34362d;
+}
+</style>
+
+<script>
+/* ===== UTILS ===== */
+const qs = s => document.querySelector(s);
+const qMeta = n => document.querySelector(`meta[name="${n}"]`);
+
+let repYear = qMeta('rep-year')?.content || '';
+let repStu  = qMeta('rep-stu')?.content  || '';
+let repTea  = qMeta('rep-tea')?.content  || '';
+let repCmt  = qMeta('rep-cmt')?.content  || '';
+let exams   = [null, null, null, null];   // [秋中, 秋末, 春中, 春末]
+let chExam;
+
+/* Tier classification (六級制) */
+function examTier(score) {
+  if (score == null || score === '') return { key:'empty', cn:'—', en:'N/A' };
+  const s = +score;
+  if (s >= 95) return { key:'special',   cn:'特優', en:'Distinction' };
+  if (s >= 90) return { key:'excellent', cn:'優',   en:'Excellent' };
+  if (s >= 80) return { key:'good',      cn:'甲',   en:'Good' };
+  if (s >= 70) return { key:'fair',      cn:'乙',   en:'Fair' };
+  if (s >= 60) return { key:'pass',      cn:'丙',   en:'Pass' };
+  return         { key:'fail',      cn:'丁',   en:'Needs Improvement' };
+}
+
+if (repYear && window.yearInput) yearInput.value = repYear;
+if (repStu  && window.stuInput)  stuInput.value  = repStu;
+if (repTea  && window.teaInput)  teaInput.value  = repTea;
+if (repCmt  && window.cmtInput)  cmtInput.value  = repCmt;
+
+/* ===== ENVELOPE ===== */
+function updateCoverTitle() {
+  qs('#coverTitle').textContent = `${repYear || ''} Final Report`;
+  qs('#coverStu').textContent   = repStu || '';
+}
+
+/* 3-D mouse-tilt effect (only on devices with hover, not touch) */
+const envScene = qs('#envScene');
+const envCard  = qs('#env');
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  envScene.addEventListener('mousemove', e => {
+    if (envCard.classList.contains('open')) return;
+    const r  = envScene.getBoundingClientRect();
+    const cx = r.left + r.width  / 2;
+    const cy = r.top  + r.height / 2;
+    const rx =  (e.clientY - cy) / (r.height / 2) * -6;
+    const ry =  (e.clientX - cx) / (r.width  / 2) *  8;
+    envCard.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+  envScene.addEventListener('mouseleave', () => {
+    if (!envCard.classList.contains('open'))
+      envCard.style.transform = '';
+  });
+}
+
+/* Click — open envelope with confetti */
+envScene.addEventListener('click', () => {
+  if (envCard.classList.contains('open')) return;
+  envCard.style.transform = '';
+  envCard.classList.add('open');
+  launchConfetti();
+  setTimeout(() => {
+    qs('#cover').style.display = 'none';
+    envCard.classList.remove('open');
+  }, 1500);
+});
+
+function launchConfetti() {
+  const colors = ['#d9c7a0','#6f8f63','#5a9968','#d4a256','#6f93a8','#c77b6b','#e8cd7a','#d2ecc8'];
+  const cx = window.innerWidth / 2;
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    p.style.cssText = `
+      background:${color};
+      left:${cx + (Math.random() - .5) * 320}px;
+      top:${window.innerHeight * .35 + (Math.random() - .5) * 80}px;
+      width:${6 + Math.random() * 8}px;
+      height:${6 + Math.random() * 8}px;
+      border-radius:${Math.random() > .4 ? '50%' : '2px'};
+      animation-duration:${1.2 + Math.random() * 1.4}s;
+      animation-delay:${Math.random() * .4}s;
+    `;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 3000);
+  }
+}
+
+/* ===== GLOBAL STATE ===== */
+let rows = [], labels = [], y24 = [], y25 = [], imp = [], isMax = [];
+let chLine, chBar, chRadar, pageNow = 0, reportReady = false;
+let prevYear = 2024, currYear = 2025, targetYear = 2026;
+const pages = [...document.querySelectorAll('.page')];
+
+/* Restore saved data */
+const savedEl = document.getElementById('savedData');
+if (savedEl && savedEl.textContent.trim()) {
+  try {
+    const s = JSON.parse(savedEl.textContent);
+    rows    = s.rows    || [];
+    repYear = s.repYear || repYear;
+    repStu  = s.repStu  || repStu;
+    repTea  = s.repTea  || repTea;
+    repCmt  = s.repCmt  || repCmt;
+    exams   = s.exams   || [null,null,null,null];
+    if (s.prevYear) prevYear = s.prevYear;
+    if (s.currYear) currYear = s.currYear;
+    if (s.targetYear) targetYear = s.targetYear;
+    reportReady = rows.length > 0;
+  } catch(e) {}
+}
+if (reportReady) {
+  if (window.yearInput) yearInput.value = repYear;
+  if (window.stuInput)  stuInput.value  = repStu;
+  if (window.teaInput)  teaInput.value  = repTea;
+  if (window.cmtInput)  cmtInput.value  = repCmt;
+  if (window.exam1Input) exam1Input.value = exams[0] ?? '';
+  if (window.exam2Input) exam2Input.value = exams[1] ?? '';
+  if (window.exam3Input) exam3Input.value = exams[2] ?? '';
+  if (window.exam4Input) exam4Input.value = exams[3] ?? '';
+  setPh(); buildTables(); buildCharts(); buildSummary(); buildExamPage();
+  pages.forEach((p, i) => p.style.display = i === 0 ? 'block' : 'none');
+  pageNow = 0;
+  prevBtn.disabled = true; nextBtn.disabled = false;
+  [pdfBtn, htmlBtn].forEach(b => { if (b) { b.disabled = false; b.style.display = ''; } });
+  cover.style.display = 'flex';
+}
+
+/* ===== PAGE DOTS ===== */
+function buildDots() {
+  const c = qs('#pageDots'); c.innerHTML = '';
+  pages.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'page-dot' + (i === pageNow ? ' active' : '');
+    d.title = `第 ${i + 1} 頁`;
+    d.onclick = () => { if (reportReady) nav(i); };
+    c.appendChild(d);
+  });
+}
+buildDots();
+
+/* ===== CSV UPLOAD ===== */
+if (window.fileInput) {
+fileInput.onchange = e => uploadBtn.disabled = !e.target.files.length;
+}
+
+if (window.uploadBtn) {
+uploadBtn.onclick = () => {
+  const f = fileInput.files[0];
+  if (!f) return alert('未選擇檔案，請先選擇 CSV 檔案。');
+  const fr = new FileReader();
+  fr.onload = ev => {
+    try {
+      rows = parseCSV(ev.target.result);
+      renderPreview(rows);
+      inputPane.style.display = 'none';
+      previewPane.style.display = 'block';
+    } catch(err) { alert('⚠ 解析失敗：' + err); }
+  };
+  fr.readAsText(f, 'utf-8');
+};
+}
+
+/* Back button */
+if (window.backBtn) backBtn.onclick = () => {
+  previewPane.style.display = 'none';
+  inputPane.style.display = '';
+};
+
+/* Year columns — auto-detected from CSV headers (declared earlier in global state) */
+
+/* ===== CSV PARSER ===== */
+function parseCSV(txt) {
+  const lines = txt.trim().split(/\r?\n/).map(l =>
+    l.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim())
+  );
+  const head = lines[0].map(h => h.replace(/\s/g, '').toLowerCase());
+  const id = k => head.indexOf(k);
+
+  // Auto-detect year columns: any header matching "YYYYscore" or "YYYYtarget"
+  const scoreYears = [];
+  let targetIdx = -1, detectedTargetYear = null;
+  head.forEach((h, i) => {
+    const ms = h.match(/^(\d{4})score$/);
+    const mt = h.match(/^(\d{4})target$/);
+    if (ms) scoreYears.push({ year: +ms[1], idx: i });
+    if (mt) { targetIdx = i; detectedTargetYear = +mt[1]; }
+  });
+  if (scoreYears.length < 2)
+    throw 'CSV 缺少分數欄位（需要兩個年度，例如 2025Score 與 2026Score）';
+  if (targetIdx < 0)
+    throw 'CSV 缺少目標欄位（例如 2027Target）';
+
+  // Sort by year, oldest first
+  scoreYears.sort((a, b) => a.year - b.year);
+  prevYear = scoreYears[0].year;
+  currYear = scoreYears[1].year;
+  targetYear = detectedTargetYear;
+  const prevIdx = scoreYears[0].idx;
+  const currIdx = scoreYears[1].idx;
+
+  // Check other required columns
+  const need = ['評量指標(cn)','indicator(en)','範疇(cn)','category(en)','核心說明(cn)','description(en)'];
+  if (need.some(k => id(k) < 0))
+    throw 'CSV 缺少必要欄位（範疇、評量指標、核心說明的中英文）';
+
+  let dom = '', cat = '';
+  return lines.slice(1).filter(r => r.length > 1).map(r => {
+    if (r[id('範疇(cn)')]) dom = r[id('範疇(cn)')];
+    if (r[id('category(en)')]) cat = r[id('category(en)')];
+    const sPrev = +r[prevIdx] || 0;
+    const sCurr = +r[currIdx] || 0;
+    const imp = sPrev ? +(((sCurr - sPrev) / sPrev * 100).toFixed(1)) : 0;
+    return [
+      dom, cat,
+      r[id('評量指標(cn)')], r[id('indicator(en)')],
+      r[id('核心說明(cn)')], r[id('description(en)')],
+      sPrev, sCurr, imp, r[targetIdx]
+    ];
+  });
+}
+
+/* Update all year labels in the DOM (thead, chart titles, etc.) */
+function updateYearLabels() {
+  // Report table headers
+  document.querySelectorAll('#tbl1 thead, #tbl2 thead').forEach(thead => {
+    thead.innerHTML = `<tr>
+      <th>範疇</th><th>Category</th><th>評量指標</th><th>Indicator</th>
+      <th>核心說明</th><th>Description</th>
+      <th>${prevYear}</th><th>${currYear}</th><th>進步%</th><th>${targetYear}目標</th>
+    </tr>`;
+  });
+  // Chart titles
+  const barTitle  = document.querySelector('#page-3 .chart-card:nth-child(1) .chart-card-title');
+  const lineTitle = document.querySelector('#page-3 .chart-card:nth-child(2) .chart-card-title');
+  if (barTitle)  barTitle.innerHTML  = `<span class="ct-icon">📊</span>${currYear} 各項指標得分`;
+  if (lineTitle) lineTitle.innerHTML = `<span class="ct-icon">📈</span>${prevYear} vs ${currYear} 趨勢比較`;
+}
+
+/* ===== PREVIEW TABLE ===== */
+function renderPreview(data) {
+  const $tbl = $('#previewTable');
+  const head = ['範疇','Category','評量指標','Indicator','核心說明','Description', String(prevYear), String(currYear),'進步%', String(targetYear)+'目標'];
+  $tbl.html('<thead><tr>' + head.map(h => `<th>${h}</th>`).join('') + '</tr></thead><tbody>' +
+    data.map(r => '<tr>' + r.map(c => `<td contenteditable>${c}</td>`).join('') + '</tr>').join('') +
+    '</tbody>');
+  if ($.fn.DataTable.isDataTable($tbl)) $tbl.DataTable().destroy();
+  $tbl.DataTable({ paging: false, searching: false, info: false });
+}
+
+/* ===== SAVE ===== */
+if (window.saveBtn) {
+saveBtn.onclick = () => {
+  const trs = [...document.querySelectorAll('#previewTable tbody tr')];
+  rows = trs.map(tr => {
+    const t = [...tr.cells].map(td => td.textContent.trim());
+    const y24 = +t[6] || 0, y25 = +t[7] || 0;
+    const imp = y24 ? +(((y25 - y24) / y24 * 100).toFixed(1)) : 0;
+    return [t[0], t[1], t[2], t[3], t[4], t[5], y24, y25, imp, t[9]];
+  });
+  repYear = yearInput.value.trim();
+  repStu  = stuInput.value.trim();
+  repTea  = teaInput.value.trim();
+  repCmt  = cmtInput.value.trim();
+  // Read exam scores (empty → null)
+  const readExam = el => {
+    const v = el && el.value.trim();
+    if (v === '' || v == null) return null;
+    const n = +v;
+    return isNaN(n) ? null : Math.max(0, Math.min(100, n));
+  };
+  exams = [
+    readExam(window.exam1Input),
+    readExam(window.exam2Input),
+    readExam(window.exam3Input),
+    readExam(window.exam4Input)
+  ];
+  qMeta('rep-year').content = repYear;
+  qMeta('rep-stu').content  = repStu;
+  qMeta('rep-tea').content  = repTea;
+  qMeta('rep-cmt').content  = repCmt;
+  let saveEl = document.getElementById('savedData');
+  if (!saveEl) {
+    saveEl = document.createElement('script');
+    saveEl.id = 'savedData'; saveEl.type = 'application/json';
+    document.head.appendChild(saveEl);
+  }
+  saveEl.textContent = JSON.stringify({ rows, repYear, repStu, repTea, repCmt, exams, prevYear, currYear, targetYear });
+  setPh(); buildTables(); buildCharts(); buildSummary(); buildExamPage();
+  pages.forEach((p, i) => p.style.display = i === 0 ? 'block' : 'none');
+  pageNow = 0;
+  prevBtn.disabled = true; nextBtn.disabled = false;
+  [pdfBtn, htmlBtn].forEach(b => { b.disabled = false; b.style.display = ''; });
+  previewPane.style.display = 'none';
+  inputPane.style.display = 'none';
+  cover.style.display = 'flex';
+  reportReady = true;
+  buildDots();
+};
+}
+
+/* ===== SET PLACEHOLDERS ===== */
+function setPh() {
+  for (let i = 0; i < 5; i++) {
+    const y = qs('#phYear' + i), s = qs('#phStu' + i), t = qs('#phTea' + i);
+    if (y) y.textContent = repYear || '—';
+    if (s) s.textContent = repStu  || '學生姓名';
+    if (t) t.textContent = repTea  || '—';
+  }
+  updateCoverTitle();
+}
+
+/* ===== SCORE / PROGRESS BADGES ===== */
+function scoreBadge(v, tgt) {
+  const isMaxTgt = String(tgt).toLowerCase() === 'max';
+  if (isMaxTgt && v >= 10) return `<span class="score-badge score-max">${v}</span>`;
+  if (v >= 9)  return `<span class="score-badge score-high">${v}</span>`;
+  if (v >= 7)  return `<span class="score-badge score-mid">${v}</span>`;
+  return `<span class="score-badge score-low">${v}</span>`;
+}
+function progBadge(v) {
+  if (v > 0)  return `<span class="prog-badge prog-up">▲ ${v}%</span>`;
+  if (v < 0)  return `<span class="prog-badge prog-down">▼ ${Math.abs(v)}%</span>`;
+  return `<span class="prog-badge prog-flat">— 0%</span>`;
+}
+
+/* ===== BUILD TABLES ===== */
+function buildTables() {
+  updateYearLabels();
+  const half = Math.ceil(rows.length / 2);
+  renderReportTable('#tbl1', rows.slice(0, half));
+  renderReportTable('#tbl2', rows.slice(half));
+
+  function renderReportTable(sel, data) {
+    // Destroy DataTable if previously initialised (clean slate)
+    if ($.fn.DataTable.isDataTable(sel)) $(sel).DataTable().destroy();
+
+    const tbody = document.querySelector(sel + ' tbody');
+    tbody.innerHTML = '';
+    let lastCat = '';
+    let rowIndex = 0;
+
+    data.forEach(r => {
+      // Category separator — inserted as a plain row BEFORE DataTable init
+      if (r[0] !== lastCat) {
+        lastCat = r[0];
+        const sepTr = document.createElement('tr');
+        sepTr.className = 'cat-row';
+        // Fill all 10 cells so DataTable column count stays consistent
+        for (let ci = 0; ci < 10; ci++) {
+          const td = document.createElement('td');
+          if (ci === 0) {
+            td.innerHTML = `<span style="display:flex;align-items:center;gap:8px;">
+              <span style="font-weight:700;color:var(--main)">▪ ${r[0]}</span>
+              <span style="opacity:.6;font-weight:400;font-size:.8rem">${r[1]}</span>
+            </span>`;
+          } else {
+            // Filler cells — completely invisible, no size, no border
+            td.style.cssText = 'padding:0!important;border:none!important;height:0!important;line-height:0!important;font-size:0!important;background:transparent!important;overflow:hidden!important;';
+          }
+          sepTr.appendChild(td);
+        }
+        tbody.appendChild(sepTr);
+      }
+
+      const tr = document.createElement('tr');
+      tr.className = rowIndex++ % 2 === 0 ? '' : 'odd';
+      // Column labels for mobile card layout (data-label)
+      const colLabels = ['', '', '指標', 'Indicator', '說明', 'Description', String(prevYear), String(currYear), '進步', String(targetYear)+'目標'];
+      r.forEach((c, i) => {
+        const td = document.createElement('td');
+        td.setAttribute('data-label', colLabels[i] || '');
+        if (i < 2) {
+          td.textContent = c;   // col 0 & 1 will be hidden via columnDefs
+        } else if (i === 6) {
+          td.innerHTML = scoreBadge(c, '');
+        } else if (i === 7) {
+          td.innerHTML = scoreBadge(c, r[9]);
+        } else if (i === 8) {
+          td.innerHTML = progBadge(c);
+        } else {
+          td.textContent = c;
+        }
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+
+    $(sel).DataTable({
+      paging:   false,
+      searching: true,
+      info:     false,
+      language: { search: '🔍 搜尋：' },
+      columnDefs: [{ targets: [0, 1], visible: false }],
+      // Prevent DataTable from sorting/styling the separator rows
+      createdRow: function(row) {
+        if ($(row).hasClass('cat-row')) {
+          $(row).find('td').attr('data-search', '').attr('data-order', '');
+        }
+      }
+    });
+  }
+}
+
+/* ===== BUILD CHARTS ===== */
+function buildCharts() {
+  if (typeof Chart === 'undefined') { console.warn('Chart.js not loaded, skipping charts'); return; }
+  labels = rows.map(r => r[2]);
+  y24    = rows.map(r => r[6]);
+  y25    = rows.map(r => r[7]);
+  imp    = rows.map(r => r[8]);
+  isMax  = rows.map(r => String(r[9]).toLowerCase() === 'max');
+
+  [chLine, chBar, chRadar].forEach(c => c && c.destroy());
+
+  // Color bars by score level
+  const barBg  = y25.map(v => v >= 9 ? 'rgba(90,153,104,.8)'  : v >= 7 ? 'rgba(111,147,168,.8)'  : 'rgba(212,162,86,.8)');
+  const barBdr = y25.map(v => v >= 9 ? '#3e7a42'               : v >= 7 ? '#4a7050'               : '#b07828');
+
+  /* ── Bar chart: sequential bottom-to-top animation ── */
+  // Start all at 0; we animate one-by-one after chart init
+  chBar = new Chart(qs('#cvBar'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: `${currYear} 分數`,
+        data: new Array(labels.length).fill(0),
+        backgroundColor: barBg.slice(),
+        borderColor: barBdr.slice(),
+        borderWidth: 1.5,
+        borderRadius: 5,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      animation: { duration: 0 },  // we drive animation manually
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` ${currYear} 分數：${ctx.raw}` } }
+      },
+      scales: {
+        y: { beginAtZero: true, max: 10, grid: { color: 'rgba(0,0,0,.05)' }, ticks: { stepSize: 2 } },
+        x: { ticks: { font: { size: 10 }, maxRotation: 35 } }
+      }
+    }
+  });
+
+  // Easing function (ease out bounce-ish)
+  function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+  // Animate a single bar from 0 → target over `dur` ms
+  function animateBar(idx, target, dur, onDone) {
+    const start = performance.now();
+    function step(now) {
+      const t = Math.min((now - start) / dur, 1);
+      chBar.data.datasets[0].data[idx] = +(target * easeOutCubic(t)).toFixed(2);
+      chBar.update('none');
+      if (t < 1) requestAnimationFrame(step);
+      else { chBar.data.datasets[0].data[idx] = target; chBar.update('none'); onDone && onDone(); }
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Play all bars sequentially, left → right
+  function playAllBars(startIdx) {
+    startIdx = startIdx || 0;
+    if (startIdx >= y25.length) return;
+    const target = y25[startIdx];
+    animateBar(startIdx, target, 420, () => {
+      // If Max target, flash pink + star after bar lands
+      if (isMax[startIdx]) {
+        chBar.data.datasets[0].backgroundColor[startIdx] = 'rgba(199,123,107,.8)';
+        chBar.data.datasets[0].borderColor[startIdx]     = '#a8503a';
+        chBar.update('none');
+        const canvas = qs('#cvBar');
+        const r = canvas.getBoundingClientRect();
+        const px = chBar.scales.x.getPixelForValue(startIdx);
+        star(r.left + px, r.top + r.height * .2);
+      }
+      // Stagger: short gap between bars
+      setTimeout(() => playAllBars(startIdx + 1), 55);
+    });
+  }
+
+  // Reset all to 0 and replay
+  function replayBars() {
+    chBar.data.datasets[0].data = new Array(labels.length).fill(0);
+    chBar.data.datasets[0].backgroundColor = barBg.slice();
+    chBar.data.datasets[0].borderColor     = barBdr.slice();
+    chBar.update('none');
+    setTimeout(() => playAllBars(0), 120);
+  }
+
+  // Auto-play on first show
+  setTimeout(() => playAllBars(0), 300);
+
+  // Click canvas → replay from scratch
+  qs('#cvBar').onclick = () => replayBars();
+
+  // Update tip text
+  const tipEl = qs('#cvBar').closest('.chart-card')?.querySelector('.tip');
+  if (tipEl) tipEl.textContent = '💡 點擊圖表可重新播放動畫；★ Max 目標項目會閃粉並灑星星';
+
+  // Line chart
+  chLine = new Chart(qs('#cvLine'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: String(prevYear), data: y24, borderColor: '#c2b48a', backgroundColor: 'rgba(194,180,138,.1)', borderWidth: 2, fill: true, tension: .35, pointRadius: 3, pointHoverRadius: 5 },
+        { label: String(currYear), data: y25, borderColor: '#6f8f63', backgroundColor: 'rgba(111,143,99,.12)', borderWidth: 2, fill: true, tension: .35, pointRadius: 3, pointHoverRadius: 5 }
+      ]
+    },
+    options: {
+      animation: { duration: 1200 },
+      plugins: { legend: { labels: { boxWidth: 12, padding: 14 } } },
+      scales: {
+        y: { beginAtZero: true, max: 10, grid: { color: 'rgba(0,0,0,.05)' }, ticks: { stepSize: 2 } },
+        x: { ticks: { font: { size: 9 }, maxRotation: 35 } }
+      },
+      responsive: true
+    }
+  });
+
+  // Radar chart (domain averages)
+  const byDom = {};
+  rows.forEach(r => {
+    if (!byDom[r[0]]) byDom[r[0]] = [];
+    byDom[r[0]].push(r[7]);
+  });
+  const domLabels = Object.keys(byDom);
+  const domAvg = domLabels.map(k => +(byDom[k].reduce((a, b) => a + b) / byDom[k].length).toFixed(2));
+
+  chRadar = new Chart(qs('#cvRadar'), {
+    type: 'radar',
+    data: {
+      labels: domLabels,
+      datasets: [{
+        label: `${currYear} 均分`, data: domAvg,
+        backgroundColor: 'rgba(111,143,99,.25)',
+        borderColor: '#6f8f63', borderWidth: 2,
+        pointBackgroundColor: '#6f8f63', pointRadius: 4
+      }]
+    },
+    options: {
+      scales: {
+        r: {
+          beginAtZero: true, max: 10,
+          ticks: { stepSize: 2, backdropColor: 'transparent', font: { size: 10 } },
+          grid: { color: 'rgba(0,0,0,.08)' },
+          pointLabels: { font: { size: 11 } }
+        }
+      },
+      plugins: { legend: { labels: { boxWidth: 12 } } }
+    }
+  });
+}
+
+/* ===== BUILD SUMMARY ===== */
+function buildSummary() {
+  qs('#teacherCmt').textContent = repCmt.trim() || '（尚未填寫評語）';
+
+  // Domain average cards
+  const byDom = {};
+  rows.forEach(r => {
+    if (!byDom[r[0]]) byDom[r[0]] = { cn: r[0], en: r[1], scores: [] };
+    byDom[r[0]].scores.push(r[7]);
+  });
+  const dc = qs('#domainCards'); dc.innerHTML = '';
+  Object.values(byDom).forEach(d => {
+    const avg  = d.scores.reduce((a, b) => a + b) / d.scores.length;
+    const tier = avg >= 9 ? 'high' : avg >= 7 ? 'mid' : 'low';
+    const card = document.createElement('div');
+    card.className = `domain-card ${tier}`;
+    card.innerHTML = `<div class="dc-cn">${d.cn}</div><div class="dc-score ${tier}">${avg.toFixed(1)}</div><div class="dc-en">${d.en}</div>`;
+    dc.appendChild(card);
+  });
+
+  // Strong / weak
+  labels = rows.map(r => r[2]);
+  y25    = rows.map(r => r[7]);
+  const strong = [], weak = [];
+  y25.forEach((v, i) => (v >= 9 ? strong : weak).push({ name: labels[i], score: v }));
+
+  function makeItems(arr) {
+    if (!arr.length) return '<p style="color:var(--text-muted);font-size:.88rem;padding:4px 0">（無符合條件的項目）</p>';
+    return '<div class="result-items">' + arr.map(o => {
+      const pct = (o.score / 10 * 100).toFixed(0);
+      const cls = o.score >= 9 ? 'ri-bar-high' : o.score >= 7 ? 'ri-bar-mid' : 'ri-bar-low';
+      return `<div class="result-item">
+        <span class="ri-name">${o.name}</span>
+        <div class="ri-bar-wrap"><div class="ri-bar-fill ${cls}" style="width:${pct}%"></div></div>
+        <span class="ri-score">${o.score}</span>
+      </div>`;
+    }).join('') + '</div>';
+  }
+
+  qs('#strongBox').innerHTML = `
+    <div class="result-box-header">
+      <span class="rh-icon">🌟</span>
+      <span class="rh-title">優勢亮點（分數 ≥ 9）</span>
+      <span class="rh-note">${strong.length} 項精熟指標</span>
+    </div>
+    <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:10px;">以下指標表現精熟，請持續發揮強項，成為學習楷模！</div>
+    ${makeItems(strong)}`;
+
+  qs('#weakBox').innerHTML = `
+    <div class="result-box-header">
+      <span class="rh-icon">📈</span>
+      <span class="rh-title">成長空間（分數 ＜ 9）</span>
+      <span class="rh-note">${weak.length} 項待加強指標</span>
+    </div>
+    <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:10px;">以下指標建議持續加強，努力達到 Max 目標！</div>
+    ${makeItems(weak)}`;
+}
+
+/* ===== BUILD EXAM PAGE ===== */
+function buildExamPage() {
+  const periods = [
+    { cn:'2025 秋季期中', en:'Fall Midterm 2025'   },
+    { cn:'2025 秋季期末', en:'Fall Final 2025'     },
+    { cn:'2026 春季期中', en:'Spring Midterm 2026' },
+    { cn:'2026 春季期末', en:'Spring Final 2026'   }
+  ];
+
+  /* ── Cards ── */
+  const cardsEl = qs('#examCards');
+  cardsEl.innerHTML = '';
+  exams.forEach((sc, i) => {
+    const tier = examTier(sc);
+    const isEmpty = sc == null;
+    let deltaHtml = '';
+    if (i > 0 && !isEmpty && exams[i-1] != null) {
+      const d = +(sc - exams[i-1]).toFixed(1);
+      if (d > 0)      deltaHtml = `<div class="ec-delta ec-delta-up">▲ +${d}</div>`;
+      else if (d < 0) deltaHtml = `<div class="ec-delta ec-delta-down">▼ ${d}</div>`;
+      else            deltaHtml = `<div class="ec-delta ec-delta-flat">— 持平</div>`;
+    } else {
+      deltaHtml = `<div class="ec-delta ec-delta-none">.</div>`;
+    }
+    const card = document.createElement('div');
+    card.className = `exam-card tier-${tier.key}` + (isEmpty ? ' empty' : '');
+    card.innerHTML = `
+      <div class="ec-period-cn">${periods[i].cn}</div>
+      <div class="ec-period-en">${periods[i].en}</div>
+      ${ isEmpty
+        ? `<div class="ec-score ec-score-empty">— —</div>
+           <div class="ec-tier-badge tier-empty" style="background:#eee;color:#999">尚未測驗</div>`
+        : `<div class="ec-score tier-${tier.key}">${sc}<span class="ec-out-of"> /100</span></div>
+           <div class="ec-tier-badge tier-${tier.key}">${tier.cn} · ${tier.en}</div>`
+      }
+      ${deltaHtml}
+    `;
+    cardsEl.appendChild(card);
+  });
+
+  /* ── Trend chart ── */
+  if (chExam) chExam.destroy();
+  const labels  = periods.map(p => p.cn.replace(/2025 |2026 /, ''));
+  const dataPts = exams.map(s => s == null ? null : +s);
+  const colors  = exams.map(s => {
+    const t = examTier(s).key;
+    return ({
+      special:'#c9a84a', excellent:'#5a9968', good:'#7d9970',
+      fair:'#9aab7e',   pass:'#d4a256',     fail:'#c77b6b',
+      empty:'#cccccc'
+    })[t];
+  });
+
+  // Dynamic Y-axis range — zoom in around the actual scores so differences show clearly
+  const valid = dataPts.filter(v => v != null);
+  let yMin = 50, yMax = 100;
+  if (valid.length) {
+    const lo = Math.min(...valid), hi = Math.max(...valid);
+    const range = hi - lo;
+    if (range <= 1) {
+      // All scores nearly identical — show a tight ±5 window, capped at 100
+      yMax = Math.min(100, Math.ceil(hi) + 3);
+      yMin = Math.max(0, yMax - 12);
+    } else {
+      // Pad above & below so points aren't glued to edges
+      const pad = Math.max(3, Math.round(range * 0.5));
+      yMax = Math.min(100, Math.ceil(hi) + pad);
+      yMin = Math.max(0, Math.floor(lo) - pad);
+    }
+  }
+  const yStep = (yMax - yMin) <= 20 ? 2 : (yMax - yMin) <= 40 ? 5 : 10;
+
+  try {
+  if (typeof Chart !== 'undefined') chExam = new Chart(qs('#cvExamTrend'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: '考試分數',
+        data: dataPts,
+        borderColor: '#5f7d5a',
+        backgroundColor: 'rgba(111,143,99,.15)',
+        borderWidth: 3,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 7,
+        pointHoverRadius: 9,
+        pointBackgroundColor: colors,
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        spanGaps: true
+      }]
+    },
+    options: {
+      animation: { duration: 1200 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const v = ctx.raw;
+              if (v == null) return '尚未測驗';
+              const t = examTier(v);
+              return ` ${v} 分 · ${t.cn} (${t.en})`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: yMin, max: yMax,
+          ticks: {
+            stepSize: yStep,
+            callback: v => v + ' 分',
+            font: { size: 11 }
+          },
+          grid: { color: 'rgba(0,0,0,.05)' }
+        },
+        x: { ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+  } catch(e){ console.error('exam chart skipped', e); }
+
+  /* ── Summary ── */
+  const validScores = exams.filter(s => s != null);
+  const summaryEl = qs('#examSummary');
+  if (validScores.length === 0) {
+    summaryEl.innerHTML = `<div style="text-align:center;color:var(--text-muted);font-size:.9rem;padding:20px;">尚無考試成績資料 · No exam scores yet</div>`;
+    return;
+  }
+  const firstSc = exams.find(s => s != null);
+  const lastIdx = (() => { for (let i = exams.length - 1; i >= 0; i--) if (exams[i] != null) return i; })();
+  const lastSc  = exams[lastIdx];
+  const totalDelta = +(lastSc - firstSc).toFixed(1);
+  const avg = +(validScores.reduce((a,b)=>a+b)/validScores.length).toFixed(1);
+  const maxSc = Math.max(...validScores);
+  const minSc = Math.min(...validScores);
+
+  const deltaCls = totalDelta > 0 ? 'up' : totalDelta < 0 ? 'down' : '';
+  const deltaSign = totalDelta > 0 ? '+' : '';
+
+  summaryEl.innerHTML = `
+    <div class="es-stat">
+      <div class="es-stat-label">平均分數 Average</div>
+      <div class="es-stat-value">${avg}</div>
+      <div class="es-stat-sub">${validScores.length} 次考試平均</div>
+    </div>
+    <div class="es-stat">
+      <div class="es-stat-label">最高分 Highest</div>
+      <div class="es-stat-value">${maxSc}</div>
+      <div class="es-stat-sub">${examTier(maxSc).cn} · ${examTier(maxSc).en}</div>
+    </div>
+    <div class="es-stat">
+      <div class="es-stat-label">最低分 Lowest</div>
+      <div class="es-stat-value">${minSc}</div>
+      <div class="es-stat-sub">${examTier(minSc).cn} · ${examTier(minSc).en}</div>
+    </div>
+  `;
+}
+
+/* ===== STAR ANIMATION ===== */
+function star(x, y) {
+  for (let i = 0; i < 16; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    document.body.appendChild(s);
+    s.style.left = x + 'px'; s.style.top = y + 'px';
+    const a = Math.random() * 6.28, d = 50 + Math.random() * 80;
+    s.animate([
+      { transform: 'translate(0,0) scale(1)', opacity: 1 },
+      { transform: `translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(.3)`, opacity: 0 }
+    ], { duration: 950, easing: 'ease-out' });
+    setTimeout(() => s.remove(), 1000);
+  }
+}
+
+/* ===== NAVIGATION ===== */
+prevBtn.onclick = () => { if (window.inputPane && inputPane.style.display !== 'none') return; nav(pageNow - 1); };
+nextBtn.onclick = () => {
+  if (window.inputPane && inputPane.style.display !== 'none') {
+    if (!reportReady) return alert('請先上傳並儲存 CSV 檔案');
+    inputPane.style.display = 'none';
+    cover.style.display = 'flex';
+    return;
+  }
+  nav(pageNow + 1);
+};
+function nav(n) {
+  if (n < 0 || n >= pages.length) return;
+  setPh();
+  pages.forEach((p, i) => p.style.display = i === n ? 'block' : 'none');
+  pageNow = n;
+  prevBtn.disabled = n === 0;
+  nextBtn.disabled = n === pages.length - 1;
+  if (n === 3) [chLine, chBar, chRadar].forEach(c => { if (c) { c.resize(); c.update(); } });
+  if (n === 0 && chExam) { chExam.resize(); chExam.update(); }
+  [...document.querySelectorAll('.page-dot')].forEach((d, i) => d.classList.toggle('active', i === n));
+}
+
+/* ===== PDF EXPORT — auto-slice, no content cutoff ===== */
+function pdfScoreBadge(v, tgt) {
+  const isMaxTgt = String(tgt).toLowerCase() === 'max';
+  const cls = (isMaxTgt && v >= 10) ? 'pdf-score-max' : v >= 9 ? 'pdf-score-high' : v >= 7 ? 'pdf-score-mid' : 'pdf-score-low';
+  const star = (isMaxTgt && v >= 10) ? '★ ' : '';
+  return `<span class="pdf-score ${cls}">${star}${v}</span>`;
+}
+function pdfProg(v) {
+  if (v > 0)  return `<span class="pdf-prog-up">▲ ${v}%</span>`;
+  if (v < 0)  return `<span class="pdf-prog-down">▼ ${Math.abs(v)}%</span>`;
+  return `<span class="pdf-prog-flat">— 0%</span>`;
+}
+
+function buildPdfTable(data) {
+  let lastCat = '', html = `<table class="pdf-table">
+  <colgroup>
+    <col><col><col><col><col><col><col><col>
+  </colgroup>
+  <thead><tr>
+    <th>評量指標</th><th>Indicator</th><th>核心說明</th><th>Description</th>
+    <th style="text-align:center">${prevYear}</th><th style="text-align:center">${currYear}</th>
+    <th style="text-align:center">進步%</th><th style="text-align:center">${targetYear}目標</th>
+  </tr></thead><tbody>`;
+  data.forEach(r => {
+    if (r[0] !== lastCat) {
+      lastCat = r[0];
+      html += `<tr class="pdf-cat-row"><td colspan="8">▪ ${r[0]}&ensp;<span style="opacity:.55;font-weight:400">${r[1]}</span></td></tr>`;
+    }
+    html += `<tr>
+      <td style="font-weight:600">${r[2]}</td>
+      <td style="color:#6e705d">${r[3]}</td>
+      <td style="color:#555">${r[4]}</td>
+      <td style="color:#777;font-size:10px">${r[5]}</td>
+      <td style="text-align:center">${pdfScoreBadge(r[6], '')}</td>
+      <td style="text-align:center">${pdfScoreBadge(r[7], r[9])}</td>
+      <td style="text-align:center">${pdfProg(r[8])}</td>
+      <td style="text-align:center;font-weight:700;color:#5f7d5a">${r[9]}</td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+  return html;
+}
+
+function buildPdfSummaryMain() {
+  // Domain cards + strong/weak (NO comment)
+  const byDom = {};
+  rows.forEach(r => {
+    if (!byDom[r[0]]) byDom[r[0]] = { cn: r[0], en: r[1], scores: [] };
+    byDom[r[0]].scores.push(r[7]);
+  });
+  let domHtml = '<div style="font-size:11px;font-weight:700;color:#5f7d5a;margin-bottom:8px;letter-spacing:.5px;">📊 各範疇平均分數</div><div class="pdf-domain-grid">';
+  Object.values(byDom).forEach(d => {
+    const avg = d.scores.reduce((a,b)=>a+b)/d.scores.length;
+    const tier = avg >= 9 ? 'high' : avg >= 7 ? 'mid' : 'low';
+    domHtml += `<div class="pdf-domain-card ${tier}">
+      <div class="pdf-dc-cn">${d.cn}</div>
+      <div class="pdf-dc-score ${tier}">${avg.toFixed(1)}</div>
+      <div class="pdf-dc-en">${d.en}</div>
+    </div>`;
+  });
+  domHtml += '</div>';
+
+  const strong = [], weak = [];
+  rows.forEach(r => (r[7] >= 9 ? strong : weak).push({ name: r[2], score: r[7] }));
+  function makeRiHtml(arr) {
+    return arr.map(o => {
+      const pct = (o.score/10*100).toFixed(0);
+      const cls = o.score >= 9 ? 'high' : o.score >= 7 ? 'mid' : 'low';
+      return `<div class="pdf-ri">
+        <span class="pdf-ri-name">${o.name}</span>
+        <div class="pdf-ri-bar"><div class="pdf-ri-fill ${cls}" style="width:${pct}%"></div></div>
+        <span class="pdf-ri-score">${o.score}</span>
+      </div>`;
+    }).join('');
+  }
+  const strongHtml = `<div class="pdf-result-section strong">
+    <div class="pdf-result-hdr">🌟 優勢亮點（分數 ≥ 9）<span class="rh-badge">${strong.length} 項精熟指標</span></div>
+    ${strong.length ? makeRiHtml(strong) : '<div style="font-size:10px;color:#aaa">（無符合條件項目）</div>'}
+  </div>`;
+  const weakHtml = `<div class="pdf-result-section weak">
+    <div class="pdf-result-hdr">📈 成長空間（分數 ＜ 9）<span class="rh-badge">${weak.length} 項待加強指標</span></div>
+    ${weak.length ? makeRiHtml(weak) : '<div style="font-size:10px;color:#aaa">（無符合條件項目）</div>'}
+  </div>`;
+  return domHtml + strongHtml + weakHtml;
+}
+
+function buildPdfCommentPage() {
+  // Teacher comment ONLY — gets its own dedicated page
+  return `
+    <div style="padding:40px 30px 0;">
+      <div style="font-size:14px;font-weight:700;color:#5f7d5a;margin-bottom:18px;letter-spacing:1.5px;display:flex;align-items:center;gap:10px;">
+        <span style="display:inline-block;width:5px;height:18px;background:linear-gradient(180deg,#d9c7a0,#5f7d5a);border-radius:2px;"></span>
+        📝 教師評語 Teacher's Comment
+      </div>
+      <div style="background:linear-gradient(135deg,#faf8f0,#fff);border-radius:14px;
+                  padding:32px 36px 28px;border:1px solid #d9c7a0;
+                  position:relative;box-shadow:0 2px 12px rgba(95,125,90,.08);min-height:280px;">
+        <div style="position:absolute;top:14px;left:18px;font-size:48px;color:#d9c7a0;
+                    font-family:Georgia,serif;line-height:1;opacity:.7;">"</div>
+        <div style="margin-left:30px;margin-top:12px;font-size:13px;line-height:2;color:#34362d;
+                    white-space:pre-wrap;">${(repCmt||'（尚未填寫評語）').replace(/\n/g,'<br>')}</div>
+        <div style="position:absolute;bottom:14px;right:22px;font-size:48px;color:#d9c7a0;
+                    font-family:Georgia,serif;line-height:1;opacity:.7;transform:rotate(180deg);">"</div>
+      </div>
+      <div style="margin-top:34px;text-align:right;font-size:11px;color:#6e705d;letter-spacing:1px;">
+        <div style="margin-bottom:6px;">${repTea || '—'}</div>
+        <div style="font-size:9px;color:#a5a594;">指導教師　Teacher</div>
+        <div style="display:inline-block;margin-top:14px;padding:4px 14px;
+                    background:#f0ead8;border-radius:14px;
+                    font-size:9px;color:#5f7d5a;letter-spacing:1.5px;">
+          ${repYear} ACADEMIC YEAR
+        </div>
+      </div>
+    </div>`;
+}
+
+// Backwards-compat alias (some old code still references this)
+function buildPdfSummaryContent() {
+  return buildPdfSummaryMain();
+}
+
+/* ─── Cover HTML ─── */
+function buildCoverHtml() {
+  return `<div class="pdf-cover">
+    <div class="cv-deco-top"></div><div class="cv-deco-bot"></div>
+    <div class="cv-inner">
+      <div class="cv-badge">Chinese Language Program</div>
+      <div class="cv-title-cn">中文學習成績單</div>
+      <div class="cv-title-en">Final Report Card</div>
+      <div class="cv-divider"></div>
+      <div class="cv-info-box">
+        <div class="cv-info-row"><span class="cv-info-label">Student</span><span class="cv-info-val">${repStu||'—'}</span></div>
+        <div class="cv-info-row"><span class="cv-info-label">Teacher</span><span class="cv-info-val">${repTea||'—'}</span></div>
+        <div class="cv-info-row"><span class="cv-info-label">Year</span><span class="cv-info-val">${repYear||'—'}</span></div>
+      </div>
+    </div>
+    <div class="cv-footer">CONFIDENTIAL · FOR FAMILY USE ONLY</div>
+  </div>`;
+}
+
+/* ─── Header & Footer HTML snippets ─── */
+function makeHdrHtml(title, pageNum) {
+  return `<div class="pdf-hdr" style="width:794px;box-sizing:border-box;">
+    <div class="ph-left">
+      <div class="ph-name">${repStu}</div>
+      <div class="ph-sub">學年度：${repYear}　　指導教師：${repTea}</div>
+    </div>
+    <div class="ph-right">
+      <div class="ph-sec">${title}</div>
+      <div class="ph-pg">第 ${pageNum} 頁</div>
+    </div>
+  </div>`;
+}
+function makeFtrHtml() {
+  return `<div class="pdf-ftr" style="width:794px;box-sizing:border-box;">
+    <span>${repYear} Chinese Language Final Report</span>
+    <span class="pf-mid">· ${repStu} ·</span>
+    <span>Confidential</span>
+  </div>`;
+}
+
+async function makePDF() {
+  const { jsPDF } = window.jspdf;
+  const render = qs('#pdf-render');
+
+  const pdf   = new jsPDF({ orientation:'portrait', unit:'px', format:'a4' });
+  const pageW = pdf.internal.pageSize.getWidth();   // ≈595 px
+  const pageH = pdf.internal.pageSize.getHeight();  // ≈842 px
+
+  /* ── helpers ── */
+
+  // Render off-screen HTML → canvas (PNG, no JPEG degradation)
+  async function shot(html, delay) {
+    render.innerHTML = html;
+    render.style.display = 'block';
+    await new Promise(r => setTimeout(r, delay || 60));
+    const cnv = await html2canvas(render.firstElementChild, {
+      scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false
+    });
+    render.style.display = 'none';
+    return cnv;
+  }
+
+  // Screenshot any live DOM element (charts etc.)
+  async function shotEl(el, bg) {
+    return html2canvas(el, {
+      scale: 2.5, useCORS: true,
+      backgroundColor: bg || '#ffffff',
+      logging: false
+    });
+  }
+
+  // Crop horizontal strip from canvas
+  function cropStrip(src, yStart, stripH) {
+    const h = Math.min(stripH, src.height - yStart);
+    if (h <= 0) return null;
+    const dst = document.createElement('canvas');
+    dst.width = src.width; dst.height = h;
+    dst.getContext('2d').drawImage(src, 0, yStart, src.width, h, 0, 0, src.width, h);
+    return dst;
+  }
+
+  // Add PNG image full-width to PDF at yPdf
+  function addImg(cnv, xPdf, yPdf, wPdf) {
+    const sc   = wPdf / cnv.width;
+    const hPdf = cnv.height * sc;
+    pdf.addImage(cnv.toDataURL('image/png'), 'PNG', xPdf, yPdf, wPdf, hPdf);
+    return hPdf;
+  }
+
+  // Canvas px → PDF px at full pageW scale
+  const c2pdf = (cnv) => pageW / cnv.width;
+
+  /* ── Section renderer: slices body across pages as needed ── */
+  async function addSection(bodyHtml, title, sectionNum) {
+    const hdrCnv = await shot(`<div style="width:794px;overflow:hidden;">${makeHdrHtml(title, sectionNum)}</div>`);
+    const ftrCnv = await shot(`<div style="width:794px;overflow:hidden;">${makeFtrHtml()}</div>`);
+
+    const hdrH   = hdrCnv.height * c2pdf(hdrCnv);
+    const ftrH   = ftrCnv.height * c2pdf(ftrCnv);
+    const slotH  = pageH - hdrH - ftrH;           // available body in PDF px
+    const slotCnv= Math.ceil(slotH / c2pdf({width: hdrCnv.width})); // in canvas px
+
+    const bodyCnv = await shot(
+      `<div style="width:794px;max-width:794px;overflow:hidden;background:#fff;
+                   padding:16px 24px 20px;box-sizing:border-box;">${bodyHtml}</div>`, 130
+    );
+
+    // Tolerance: ignore a trailing remainder smaller than 6% of a page slot
+    // (prevents an almost-empty extra page from being created)
+    const tol = Math.round(slotCnv * 0.06);
+
+    let yOff = 0;
+    while (yOff < bodyCnv.height - tol) {
+      pdf.addPage();
+      addImg(hdrCnv, 0, 0, pageW);
+      const strip = cropStrip(bodyCnv, yOff, slotCnv);
+      if (strip) addImg(strip, 0, hdrH, pageW);
+      addImg(ftrCnv, 0, pageH - ftrH, pageW);
+      yOff += slotCnv;
+    }
+  }
+
+  /* ── 1. Cover ── */
+  const coverCnv = await shot(buildCoverHtml(), 120);
+  const sc0 = Math.min(pageW / coverCnv.width, pageH / coverCnv.height);
+  pdf.addImage(coverCnv.toDataURL('image/png'), 'PNG', 0, 0,
+    coverCnv.width * sc0, coverCnv.height * sc0);
+
+  /* ── 2. Exam page — screenshot live #page-0 directly ── */
+  nav(0);
+  await new Promise(r => setTimeout(r, 700));
+
+  const exHdrCnv = await shot(`<div style="width:794px;overflow:hidden;">${makeHdrHtml('定期評量成績 Term Examinations', 1)}</div>`);
+  const exFtrCnv = await shot(`<div style="width:794px;overflow:hidden;">${makeFtrHtml()}</div>`);
+  const exHdrH   = exHdrCnv.height * c2pdf(exHdrCnv);
+  const exFtrH   = exFtrCnv.height * c2pdf(exFtrCnv);
+  const exSlotH  = pageH - exHdrH - exFtrH - 8;
+
+  // Capture the entire #page-0 .container content (skip the original report-header)
+  const examPageEl = qs('#page-0 .container');
+  // Temporarily hide the on-screen page-0 header (we'll use PDF header instead)
+  const onScreenHdr = examPageEl.querySelector('.report-header');
+  const origHdrDisp = onScreenHdr.style.display;
+  onScreenHdr.style.display = 'none';
+  await new Promise(r => setTimeout(r, 100));
+
+  const examCnv = await shotEl(examPageEl, '#f5f3ea');
+  onScreenHdr.style.display = origHdrDisp;
+
+  // Scale to fit slot
+  const exScale = Math.min(pageW / (examCnv.width / 2.5), exSlotH / (examCnv.height / 2.5));
+  const exW = (examCnv.width  / 2.5) * exScale;
+  const exH = (examCnv.height / 2.5) * exScale;
+  const exX = (pageW - exW) / 2;
+  const exY = exHdrH + 4;
+
+  pdf.addPage();
+  addImg(exHdrCnv, 0, 0, pageW);
+  pdf.addImage(examCnv.toDataURL('image/png'), 'PNG', exX, exY, exW, exH);
+  addImg(exFtrCnv, 0, pageH - exFtrH, pageW);
+
+  /* ── 3-4. Table pages ── */
+  const half = Math.ceil(rows.length / 2);
+  await addSection(
+    `<div class="pdf-section-title">各項評量指標成績（前半段） Indicators (Part 1)</div>` + buildPdfTable(rows.slice(0, half)),
+    '評量成績表（上） Assessment (Part 1)', 2);
+  await addSection(
+    `<div class="pdf-section-title">各項評量指標成績（後半段） Indicators (Part 2)</div>` + buildPdfTable(rows.slice(half)),
+    '評量成績表（下） Assessment (Part 2)', 3);
+
+  /* ── 5. Chart page — screenshot the LIVE rendered chart page directly ── */
+  nav(3);
+  await new Promise(r => setTimeout(r, 700)); // let all 3 charts fully render
+
+  // Render header/footer for this page
+  const chHdrCnv = await shot(`<div style="width:794px;overflow:hidden;">${makeHdrHtml('成績圖表分析 Visual Analysis', 4)}</div>`);
+  const chFtrCnv = await shot(`<div style="width:794px;overflow:hidden;">${makeFtrHtml()}</div>`);
+  const chHdrH   = chHdrCnv.height * c2pdf(chHdrCnv);
+  const chFtrH   = chFtrCnv.height * c2pdf(chFtrCnv);
+  const chSlotH  = pageH - chHdrH - chFtrH - 8;
+
+  const chartGridEl = qs('#page-3 .chart-grid');
+  const barCanvas   = qs('#cvBar');
+  const origStyles  = { bar: barCanvas.style.cssText };
+  barCanvas.style.maxHeight = '360px';
+  [chLine, chBar, chRadar].forEach(c => { if(c) c.resize(); });
+  await new Promise(r => setTimeout(r, 300));
+
+  const chartGridCnv = await shotEl(chartGridEl, '#f5f3ea');
+
+  barCanvas.style.cssText = origStyles.bar;
+  [chLine, chBar, chRadar].forEach(c => { if(c) c.resize(); });
+
+  const cgScale  = Math.min(pageW / (chartGridCnv.width / 2.5), chSlotH / (chartGridCnv.height / 2.5));
+  const cgW      = (chartGridCnv.width  / 2.5) * cgScale;
+  const cgH      = (chartGridCnv.height / 2.5) * cgScale;
+  const cgX      = (pageW - cgW) / 2;
+  const cgY      = chHdrH + (chSlotH - cgH) / 2 + 4;
+
+  pdf.addPage();
+  addImg(chHdrCnv, 0, 0, pageW);
+  pdf.addImage(chartGridCnv.toDataURL('image/png'), 'PNG', cgX, cgY, cgW, cgH);
+  addImg(chFtrCnv, 0, pageH - chFtrH, pageW);
+
+  /* ── 6. Summary main page (cards + strong/weak) ── */
+  await addSection(
+    `<div class="pdf-section-title">總結分析 Summary &amp; Analysis</div>
+     ${buildPdfSummaryMain()}`,
+    '總結分析 Summary', 5);
+
+  /* ── 7. Teacher comment page (full dedicated page) ── */
+  await addSection(
+    buildPdfCommentPage(),
+    '教師評語 Teacher\'s Comment', 6);
+
+  nav(0);
+  return pdf;
+}
+/* ===== PDF DOWNLOAD (mobile-compatible) ===== */
+function isMobile() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      || (navigator.maxTouchPoints && navigator.maxTouchPoints > 1 && /Macintosh/i.test(navigator.userAgent));
+}
+
+async function downloadPDF() {
+  const btn = window.pdfBtn;
+  const origText = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ 產生中… Generating…'; }
+  try {
+    const pdf = await makePDF();
+    const fname = `成績單_${repStu || 'report'}_${repYear || ''}.pdf`;
+
+    if (isMobile()) {
+      // Mobile: jsPDF .save() is unreliable (esp. iOS Safari & in-app browsers).
+      // Open the PDF as a blob in a new tab so the user can use the browser's
+      // built-in "share / save to Files" function.
+      const blob = pdf.output('blob');
+      const url  = URL.createObjectURL(blob);
+      // Try opening in a new tab/window
+      const win = window.open(url, '_blank');
+      if (!win) {
+        // Pop-up blocked — navigate current tab to the PDF instead
+        // (use a temporary link so the filename hint is preserved where supported)
+        const a = document.createElement('a');
+        a.href = url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    } else {
+      // Desktop: standard download
+      pdf.save(fname);
+    }
+  } catch (err) {
+    console.error('PDF error:', err);
+    alert('PDF 產生失敗，請再試一次。\n（若使用 LINE 或微信開啟，建議改用 Safari 或 Chrome 瀏覽器）');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = origText; }
+  }
+}
+if (window.pdfBtn) pdfBtn.onclick = downloadPDF;
+
+/* ===== HTML EXPORT (家長端) ===== */
+function exportHTML() {
+  if (!rows.length) return alert('請先上傳並解析 CSV 檔案');
+  const clone = document.documentElement.cloneNode(true);
+  clone.querySelector('#inputPane')?.remove();
+  clone.querySelector('#previewPane')?.remove();
+  clone.querySelector('#htmlBtn')?.remove();
+
+  // Mark body as parent-mode so any leftover editing UI is hidden via CSS
+  const cloneBody = clone.querySelector('body');
+  if (cloneBody) cloneBody.classList.add('parent-mode');
+
+  // ── Reset all dynamic content so parent-mode rebuilds cleanly ──
+  // Tables: destroy DataTables wrapper structure, rebuild thead from scratch
+  const FRESH_THEAD = `<tr>
+      <th>範疇</th><th>Category</th><th>評量指標</th><th>Indicator</th>
+      <th>核心說明</th><th>Description</th>
+      <th>${prevYear}</th><th>${currYear}</th><th>進步%</th><th>${targetYear}目標</th>
+    </tr>`;
+
+  ['#tbl1', '#tbl2'].forEach(sel => {
+    const wrapper = clone.querySelector(sel + '_wrapper');
+    const tbl     = clone.querySelector(sel);
+    if (tbl) {
+      // If table is wrapped by DataTables, lift it out
+      if (wrapper && wrapper.parentNode) {
+        wrapper.parentNode.replaceChild(tbl, wrapper);
+      }
+      // Strip DataTables-added classes/attrs from <table>
+      tbl.classList.remove('dataTable','no-footer','display');
+      tbl.classList.add('display');
+      tbl.removeAttribute('aria-describedby');
+      tbl.removeAttribute('role');
+      tbl.removeAttribute('style');
+      // FULLY REBUILD thead with clean HTML (removes DataTables sort spans, etc.)
+      const thead = tbl.querySelector('thead');
+      if (thead) thead.innerHTML = FRESH_THEAD;
+      // Clear tbody (DataTables sometimes leaves <tr class="dt-empty"> rows behind)
+      const tbody = tbl.querySelector('tbody');
+      if (tbody) tbody.innerHTML = '';
+      // Remove any nested DataTables debris (search box, info, paging) outside the table
+      tbl.parentNode.querySelectorAll('.dataTables_filter, .dataTables_info, .dataTables_paginate, .dataTables_length, .dt-search, .dt-info, .dt-paging, .dt-length').forEach(el => el.remove());
+    }
+  });
+
+  // Clear chart canvases (will be rebuilt)
+  ['#cvBar','#cvLine','#cvRadar','#cvExamTrend'].forEach(sel => {
+    const c = clone.querySelector(sel);
+    if (c) {
+      c.removeAttribute('width');
+      c.removeAttribute('height');
+      c.style.cssText = '';
+    }
+  });
+
+  // Clear dynamic content holders
+  ['#examCards','#examSummary','#domainCards','#strongBox','#weakBox','#teacherCmt','#pageDots','#pdf-render']
+    .forEach(sel => { const el = clone.querySelector(sel); if (el) el.innerHTML = ''; });
+
+  // Clear any saved JSON data block (parent will use init data only)
+  const oldSave = clone.querySelector('#savedData');
+  if (oldSave) oldSave.textContent = '';
+
+  // Inject parent-mode init script — wait for window load so all funcs defined
+  const init = document.createElement('script');
+  init.textContent = `
+    (function(){
+      function initReport() {
+        // Inject data
+        rows    = ${JSON.stringify(rows)};
+        repYear = ${JSON.stringify(repYear)};
+        repStu  = ${JSON.stringify(repStu)};
+        repTea  = ${JSON.stringify(repTea)};
+        repCmt  = ${JSON.stringify(repCmt)};
+        exams   = ${JSON.stringify(exams)};
+        prevYear   = ${JSON.stringify(prevYear)};
+        currYear   = ${JSON.stringify(currYear)};
+        targetYear = ${JSON.stringify(targetYear)};
+        reportReady = true;
+
+        // Show the envelope IMMEDIATELY so the parent always sees it,
+        // even if a later build step has trouble.
+        try { document.body.classList.add('parent-mode'); document.querySelector('#cover').style.display = 'flex'; } catch(e){}
+
+        // Each build step is independent — one failing won't block the others.
+        try { setPh(); }        catch(e){ console.error('setPh',e); }
+        try { buildExamPage(); } catch(e){ console.error('buildExamPage',e); }
+        try { buildSummary(); }  catch(e){ console.error('buildSummary',e); }
+        try { buildCharts(); }   catch(e){ console.error('buildCharts',e); }
+        try { buildTables(); }   catch(e){ console.error('buildTables',e); }
+        try { buildDots(); }     catch(e){ console.error('buildDots',e); }
+        try {
+          pages.forEach(function(p,i){ p.style.display = i===0 ? 'block' : 'none'; });
+          pageNow = 0;
+          prevBtn.disabled = true;
+          nextBtn.disabled = false;
+          pdfBtn.disabled  = false;
+          pdfBtn.style.display = '';
+        } catch(e){ console.error('nav setup',e); }
+      }
+
+      // Show the envelope + build content. Must run AFTER the main <script>'s
+      // top-level let-declarations finish, so we always defer (never call synchronously).
+      function showCoverNow() {
+        try {
+          document.body.classList.add('parent-mode');
+          var c = document.querySelector('#cover');
+          if (c) c.style.display = 'flex';
+        } catch(e){}
+      }
+      function go() { showCoverNow(); try { initReport(); } catch(e){ console.error('init', e); } }
+      // setTimeout(0) guarantees the main script has fully executed first.
+      setTimeout(go, 0);
+      if (document.readyState === 'loading')
+        document.addEventListener('DOMContentLoaded', go);
+      window.addEventListener('load', go);
+      // Extra passes for slow CDNs so charts/tables redraw once libs load.
+      setTimeout(go, 1500);
+      setTimeout(go, 4000);
+    })();
+  `;
+  cloneBody.appendChild(init);
+
+  const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `成績單_${repStu || 'student'}_${repYear || ''}.html`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+if (window.htmlBtn) htmlBtn.addEventListener('click', exportHTML);
+</script>
+
+
+<script>
+    (function(){
+      function initReport() {
+        // Inject data
+        rows    = [["出席與紀律","Attendance & Conduct","出席率","Attendance Rate","到課準時、請假事前告知","Punctual attendance; prior notice for absences",9,10,11.1,"Max"],["出席與紀律","Attendance & Conduct","課堂參與","Class Participation","舉手發言、課堂練習投入度、專注力","Raises hand, engages in tasks, stays focused",8.5,9.5,11.8,"Max"],["口語","Speaking","口語流利度","Speaking Fluency","說話連貫度、停頓時間、語速與節奏","Flow, pause length, speed, and rhythm of speech",9,9.5,5.6,"Max"],["口語","Speaking","發音與聲調","Pronunciation & Tones","四聲、兒化、輕聲等準確度；易混聲母韻母辨識","Accuracy of four tones, retroflex/neutral tone; distinguish confusing initials/finals",9,9.5,5.6,"Max"],["口語","Speaking","會話互動","Interactive Conversation","能提問、應答、接續話題並使用禮貌用語","Ask, respond, sustain topic, use polite expressions",9,9.5,5.6,"Max"],["學習態度","Learning Attitude","作業完成度","Homework Completion","準時繳交、正確率、自我修訂意願","On-time submission, accuracy, willingness to self-edit",9,10,11.1,"Max"],["學習態度","Learning Attitude","自主學習","Self-directed Learning","主動預習複習、使用中文 App 或閱讀課外書","Proactive preview/review; uses Chinese apps or extra reading",8.5,9,5.9,"Max"],["學習態度","Learning Attitude","家庭參與","Family Involvement","家長共讀、家庭中文對話頻率、家庭作業支持","Parent-child reading, home Chinese conversation, homework support",10,10,0,"Max"],["寫作","Writing","字形筆順","Character Formation","筆畫正確、結構端正、書寫整潔度","Correct stroke order, balanced structure, neatness",8,9,12.5,"Max"],["寫作","Writing","句型運用","Sentence Patterns","正確使用並變化基本句式（把、被、連動、比較等）","Accurate and varied use of basic patterns (ba-construction, passive, serial verbs, comparisons)",7.5,9,20,"Max"],["寫作","Writing","段落組織","Paragraph Organization","主題句、過渡詞、結尾呼應；篇章邏輯","Topic sentence, transitions, closure; logical flow",6,8,33.3,"9"],["寫作","Writing","創意表達","Creative Expression","能在小作文加入感受、例子或修辭，展現個人風格","Add feelings, examples, rhetorical devices; show personal voice",7,9,28.6,"Max"],["文化與品德","Culture & Character","中華文化知識","Chinese-Culture Knowledge","節慶、歷史人物、地理常識與相關禮俗","Festivals, historical figures, geography, customs",9,10,11.1,"Max"],["文化與品德","Culture & Character","文化參與度","Cultural Participation","積極投入節慶活動、社團或課外文化專案","Active in festivals, clubs, or cultural projects",10,10,0,"Max"],["文化與品德","Culture & Character","品德與合作","Character & Teamwork","尊重同儕、團隊協作、服務學習參與","Respect peers, cooperate in teams, join service-learning",10,10,0,"Max"],["聽力","Listening","聽力理解","Listening Comprehension","能聽懂課堂指令、日常對話、素材（影片／故事）大意與細節","Understand classroom directions, everyday dialogue, and main ideas + details in audio/video or stories",9.5,10,5.3,"Max"],["聽力","Listening","關鍵訊息擷取","Key-Information Extraction","能抓住「人物、事件、時間、因果」等要點並筆記","Identify and note people, events, time, cause–effect, etc.",9,9.5,5.6,"Max"],["評量延伸","Extended Assessment","課外補充參與","Enrichment Participation","參加夏令營、中文比賽、社區服務等","Joins camps, contests, community service",8.5,9.5,11.8,"Max"],["評量延伸","Extended Assessment","評量反思","Assessment Reflection","學生能自評優勢與改進點，設定下一步學習目標","Self-evaluate strengths/needs; set next-step goals",10,10,0,"Max"],["詞彙‧語法","Vocabulary & Grammar","詞彙量","Vocabulary Range","高頻詞掌握、多義詞運用、近義／反義辨析","Master high-frequency words, use polysemy, distinguish synonyms/antonyms",8.5,9,5.9,"Max"],["詞彙‧語法","Vocabulary & Grammar","語法準確度","Grammatical Accuracy","時態、量詞、介詞、助詞使用恰當","Correct use of aspect/tense, classifiers, prepositions, particles",8.5,9.5,11.8,"Max"],["閱讀","Reading","閱讀理解","Reading Comprehension","能概括主旨、推論隱含信息、分辨事實與觀點","Summarize main idea, infer implicit info, distinguish fact vs. opinion",5.5,8,45.5,"9"],["閱讀","Reading","閱讀速度","Reading Speed","每分鐘識字／字數，隨年級逐步提高","Characters or words per minute; incremental by grade",5.5,8,45.5,"9"]];
+        repYear = "2025-2026";
+        repStu  = "陳藝升（Winston）";
+        repTea  = "李姿瑩（Ivy Lee）";
+        repCmt  = "這一年，藝升讓我最想為他喝采的，是期末作業的那段歷程。一開始他對自己沒有把握，甚至有點想退縮—但他沒有就這樣放棄。我們一起努力、一起練習，加上他自己私下不斷下功夫，最後他拿出了非常完美的表現。那一刻，我打從心底替他感到驕傲。對我來說，比起成果本身，他願意鼓起勇氣、撐過那段不安、然後超越自己的這份心，更值得肯定。\n他的閱讀能力也常常給我驚喜。有些連大人都覺得不容易的字，他都能讀得又穩又好。看著他一字一句把課文念出來，我總會想—這孩子的底子，遠比他自己以為的還要扎實。\n也要特別謝謝藝升的爸爸媽媽。這一年來，你們始終保持著密切的溝通，配合度非常高，讓老師在陪伴孩子的路上一點都不孤單。能遇到這樣用心的家庭，是我的榮幸。期待藝升帶著這次「原來我做得到」的信心，繼續勇敢往前走。\n\nWhat I most want to cheer 藝升 on for this year is the journey he went through with his final project. At first he wasn't sure of himself — he even wanted to pull back a little — but he didn't just give up. We worked at it together, practiced together, and with all the effort he put in on his own, he ended up turning in a really wonderful piece of work. In that moment, I felt so proud of him. For me, even more than the result itself, what means the most is the heart it took for him to find his courage, push through that uncertainty, and rise above what he thought he could do.\nHis reading also surprises me again and again. There are characters that even adults would find tricky, and he reads them steadily and well. Watching him read a passage word by word, I often think to myself — this boy's foundation is far stronger than he gives himself credit for.\nI also want to give special thanks to 藝升's mom and dad. All year long you've kept up such close communication and have been so wonderfully cooperative — it's made me feel anything but alone in walking alongside your child. Getting to work with a family this caring has truly been my privilege. I can't wait to see 藝升 carry this new \"I really can do it\" confidence with him and keep moving bravely forward.";
+        exams   = [100,100,100,100];
+        prevYear   = 2025;
+        currYear   = 2026;
+        targetYear = 2027;
+        reportReady = true;
+
+        // Show the envelope IMMEDIATELY so the parent always sees it,
+        // even if a later build step has trouble.
+        try { document.body.classList.add('parent-mode'); document.querySelector('#cover').style.display = 'flex'; } catch(e){}
+
+        // Each build step is independent — one failing won't block the others.
+        try { setPh(); }        catch(e){ console.error('setPh',e); }
+        try { buildExamPage(); } catch(e){ console.error('buildExamPage',e); }
+        try { buildSummary(); }  catch(e){ console.error('buildSummary',e); }
+        try { buildCharts(); }   catch(e){ console.error('buildCharts',e); }
+        try { buildTables(); }   catch(e){ console.error('buildTables',e); }
+        try { buildDots(); }     catch(e){ console.error('buildDots',e); }
+        try {
+          pages.forEach(function(p,i){ p.style.display = i===0 ? 'block' : 'none'; });
+          pageNow = 0;
+          prevBtn.disabled = true;
+          nextBtn.disabled = false;
+          pdfBtn.disabled  = false;
+          pdfBtn.style.display = '';
+        } catch(e){ console.error('nav setup',e); }
+      }
+
+      // Show the envelope + build content. Must run AFTER the main <script>'s
+      // top-level let-declarations finish, so we always defer (never call synchronously).
+      function showCoverNow() {
+        try {
+          document.body.classList.add('parent-mode');
+          var c = document.querySelector('#cover');
+          if (c) c.style.display = 'flex';
+        } catch(e){}
+      }
+      function go() { showCoverNow(); try { initReport(); } catch(e){ console.error('init', e); } }
+      // setTimeout(0) guarantees the main script has fully executed first.
+      setTimeout(go, 0);
+      if (document.readyState === 'loading')
+        document.addEventListener('DOMContentLoaded', go);
+      window.addEventListener('load', go);
+      // Extra passes for slow CDNs so charts/tables redraw once libs load.
+      setTimeout(go, 1500);
+      setTimeout(go, 4000);
+    })();
+  </script></body></html>
