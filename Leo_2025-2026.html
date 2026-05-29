@@ -6,15 +6,15 @@
 <meta name="rep-year" content="2025-2026">
 <meta name="rep-stu" content="鄭理恩（Leo）">
 <meta name="rep-tea" content="李姿瑩（Ivy Lee）">
-<meta name="rep-cmt" content="理恩是個聰明又有想法的孩子。他的中文底子很好，字彙量豐富，對詞語的理解相當到位，閱讀能力也很強—讀一篇文章，他不只看懂表面意思，還能抓到背後的重點，這在同齡孩子裡是很難得的。
+<meta name="rep-cmt" content="理恩是個聰明又有想法的孩子。他的中文底子很好，字彙量豐富，對詞語的理解相當到位，閱讀能力也很強——讀一篇文章，他不只看懂表面意思，還能抓到背後的重點，這在同齡孩子裡是很難得的。
 我特別喜歡他願意分享的那份熱情。課堂上他常常主動跟大家聊他在做的其他事情—足球場上的比賽、正在進行的科展、鋼琴的練習。從他發亮的眼神和滔滔不絕的描述裡，看得出他對生活充滿投入，也很樂於把自己的世界跟大家分享。
 他對結合科學的課程內容特別感興趣，每次上到這類主題，他總是聽得最專注、問得最起勁。這份旺盛的好奇心和求知慾，是推動一個孩子持續成長最珍貴的動力—它會帶著理恩不斷探索、不斷發現，走得又遠又精彩。
-謝謝爸爸媽媽一路的陪伴與栽培。理恩是個充滿潛力的孩子，期待他帶著這份聰慧與好奇，在中文以及更廣的世界裡盡情發揮。
+也謝謝理恩特地送給我的那些作品，我真的非常喜歡，心裡也很感動。能被孩子這樣記在心上，是當老師最幸福的時刻。謝謝爸爸媽媽一路的陪伴與栽培—理恩是個充滿潛力的孩子，期待他帶著這份聰慧與好奇，在中文以及更廣的世界裡盡情發揮。
 
 Leo is a bright kid with a mind of his own. His Chinese is really solid — he's got a rich vocabulary, a strong grasp of what words mean, and his reading is excellent. When he reads a passage, he doesn't just catch the surface meaning; he picks up on the deeper points too, which is pretty rare for his age.
 One thing I really love is how happy he is to share. In class he'll often start telling everyone about the other things he's into — a soccer match he played, a science fair project he's working on, how his piano is coming along. You can see it in his eyes and hear it in the way he goes on and on: he's a kid who throws himself into life, and he loves bringing his world to the rest of us.
 He's especially drawn to lessons that tie in science. Whenever a topic like that comes up, he's the one listening hardest and asking the most questions. That kind of lively curiosity and hunger to learn is one of the most precious things that keeps a child growing — it's going to carry Leo to keep exploring, keep discovering, and go far in wonderful ways.
-Thank you to Mom and Dad for all your support and for everything you've done to nurture him. Leo is a boy full of potential, and I can't wait to see him take that bright mind and curiosity and let it shine — in Chinese, and in the wider world too.">
+I also want to thank Leo for the little works he made and gave to me — I truly love them, and they touched my heart. Being remembered by a student like this is one of the happiest moments of being a teacher. And thank you to Mom and Dad for all your support and care along the way — Leo is a boy full of potential, and I can't wait to see him take that bright mind and curiosity and let it shine, in Chinese and in the wider world too.">
 <script id="savedData" type="application/json"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -867,9 +867,9 @@ body.parent-mode #cover{display:flex;}
 
 
 <!-- ===== 成績單：定期評量成績（新增第一頁） ===== -->
-<div id="page-0" class="page" style="display: block;">
+<div id="page-0" class="page" style="display: none;">
 <div class="container">
-  <div class="report-header" style="">
+  <div class="report-header">
     <div class="rh-left">
       <div class="rh-student" id="phStu0">鄭理恩（Leo）</div>
       <div class="rh-meta">學年度：<span id="phYear0">2025-2026</span>　指導教師：<span id="phTea0">李姿瑩（Ivy Lee）</span></div>
@@ -973,7 +973,7 @@ body.parent-mode #cover{display:flex;}
 </div>
 
 <!-- ===== 成績單：總結分析（含教師評語） ===== -->
-<div id="page-4" class="page" style="display: none;">
+<div id="page-4" class="page" style="display: block;">
 <div class="container">
   <div class="report-header">
     <div class="rh-left">
@@ -999,9 +999,9 @@ body.parent-mode #cover{display:flex;}
 
 <!-- ===== STICKY NAV ===== -->
 <div class="nav-bar">
-  <button class="btn btn-outline" id="prevBtn" disabled="">← 上一頁</button>
+  <button class="btn btn-outline" id="prevBtn">← 上一頁</button>
   <div class="page-dots" id="pageDots"></div>
-  <button class="btn btn-outline" id="nextBtn">下一頁 →</button>
+  <button class="btn btn-outline" id="nextBtn" disabled="">下一頁 →</button>
   <button class="btn btn-primary" id="pdfBtn">⬇ 下載 PDF</button>
   
 </div>
@@ -1073,7 +1073,7 @@ body.parent-mode #cover{display:flex;}
   </div>
 </div>
 <!-- Hidden PDF render container (off-screen, A4-sized pages) -->
-<div id="pdf-render" style="position: fixed; left: -9999px; top: 0px; width: 794px; background: rgb(255, 255, 255); font-family: &quot;Noto Sans TC&quot;, &quot;YRDZST Semibold&quot;, sans-serif; color: rgb(52, 54, 45); display: none;"></div>
+<div id="pdf-render" style="position:fixed;left:-9999px;top:0;width:794px;background:#fff;font-family:'Noto Sans TC','YRDZST Semibold',sans-serif;color:#34362d;"></div>
 <style>
 /* ===== PDF RENDER STYLES (only used inside #pdf-render) ===== */
 #pdf-render{font-size:13px;line-height:1.6;}
@@ -2478,7 +2478,52 @@ async function makePDF() {
   nav(0);
   return pdf;
 }
-if (window.pdfBtn) pdfBtn.onclick = async () => makePDF().then(p => p.save(`final_report_${repYear}.pdf`));
+/* ===== PDF DOWNLOAD (mobile-compatible) ===== */
+function isMobile() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      || (navigator.maxTouchPoints && navigator.maxTouchPoints > 1 && /Macintosh/i.test(navigator.userAgent));
+}
+
+async function downloadPDF() {
+  const btn = window.pdfBtn;
+  const origText = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ 產生中… Generating…'; }
+  try {
+    const pdf = await makePDF();
+    const fname = `成績單_${repStu || 'report'}_${repYear || ''}.pdf`;
+
+    if (isMobile()) {
+      // Mobile: jsPDF .save() is unreliable (esp. iOS Safari & in-app browsers).
+      // Open the PDF as a blob in a new tab so the user can use the browser's
+      // built-in "share / save to Files" function.
+      const blob = pdf.output('blob');
+      const url  = URL.createObjectURL(blob);
+      // Try opening in a new tab/window
+      const win = window.open(url, '_blank');
+      if (!win) {
+        // Pop-up blocked — navigate current tab to the PDF instead
+        // (use a temporary link so the filename hint is preserved where supported)
+        const a = document.createElement('a');
+        a.href = url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    } else {
+      // Desktop: standard download
+      pdf.save(fname);
+    }
+  } catch (err) {
+    console.error('PDF error:', err);
+    alert('PDF 產生失敗，請再試一次。\n（若使用 LINE 或微信開啟，建議改用 Safari 或 Chrome 瀏覽器）');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = origText; }
+  }
+}
+if (window.pdfBtn) pdfBtn.onclick = downloadPDF;
 
 /* ===== HTML EXPORT (家長端) ===== */
 function exportHTML() {
@@ -2622,11 +2667,11 @@ if (window.htmlBtn) htmlBtn.addEventListener('click', exportHTML);
     (function(){
       function initReport() {
         // Inject data
-        rows    = [["出席與紀律","Attendance & Conduct","出席率","Attendance Rate","到課準時、請假事前告知","Punctual attendance; prior notice for absences",9,10,11.1,"Max"],["出席與紀律","Attendance & Conduct","課堂參與","Class Participation","舉手發言、課堂練習投入度、專注力","Raises hand, engages in tasks, stays focused",8.5,9.5,11.8,"Max"],["口語","Speaking","口語流利度","Speaking Fluency","說話連貫度、停頓時間、語速與節奏","Flow, pause length, speed, and rhythm of speech",10,10,0,"Max"],["口語","Speaking","發音與聲調","Pronunciation & Tones","四聲、兒化、輕聲等準確度；易混聲母韻母辨識","Accuracy of four tones, retroflex/neutral tone; distinguish confusing initials/finals",10,10,0,"Max"],["口語","Speaking","會話互動","Interactive Conversation","能提問、應答、接續話題並使用禮貌用語","Ask, respond, sustain topic, use polite expressions",9,10,11.1,"Max"],["學習態度","Learning Attitude","作業完成度","Homework Completion","準時繳交、正確率、自我修訂意願","On-time submission, accuracy, willingness to self-edit",9.5,10,5.3,"Max"],["學習態度","Learning Attitude","自主學習","Self-directed Learning","主動預習複習、使用中文 App 或閱讀課外書","Proactive preview/review; uses Chinese apps or extra reading",8.5,10,17.6,"Max"],["學習態度","Learning Attitude","家庭參與","Family Involvement","家長共讀、家庭中文對話頻率、家庭作業支持","Parent-child reading, home Chinese conversation, homework support",10,10,0,"Max"],["寫作","Writing","字形筆順","Character Formation","筆畫正確、結構端正、書寫整潔度","Correct stroke order, balanced structure, neatness",8,9,12.5,"9"],["寫作","Writing","句型運用","Sentence Patterns","正確使用並變化基本句式（把、被、連動、比較等）","Accurate and varied use of basic patterns (ba-construction, passive, serial verbs, comparisons)",7.5,9.5,26.7,"Max"],["寫作","Writing","段落組織","Paragraph Organization","主題句、過渡詞、結尾呼應；篇章邏輯","Topic sentence, transitions, closure; logical flow",5.5,8,45.5,"9"],["寫作","Writing","創意表達","Creative Expression","能在小作文加入感受、例子或修辭，展現個人風格","Add feelings, examples, rhetorical devices; show personal voice",6.5,8,23.1,"9"],["文化與品德","Culture & Character","中華文化知識","Chinese-Culture Knowledge","節慶、歷史人物、地理常識與相關禮俗","Festivals, historical figures, geography, customs",9.5,10,5.3,"Max"],["文化與品德","Culture & Character","文化參與度","Cultural Participation","積極投入節慶活動、社團或課外文化專案","Active in festivals, clubs, or cultural projects",10,10,0,"Max"],["文化與品德","Culture & Character","品德與合作","Character & Teamwork","尊重同儕、團隊協作、服務學習參與","Respect peers, cooperate in teams, join service-learning",10,10,0,"Max"],["聽力","Listening","聽力理解","Listening Comprehension","能聽懂課堂指令、日常對話、素材（影片／故事）大意與細節","Understand classroom directions, everyday dialogue, and main ideas + details in audio/video or stories",9.5,10,5.3,"Max"],["聽力","Listening","關鍵訊息擷取","Key-Information Extraction","能抓住「人物、事件、時間、因果」等要點並筆記","Identify and note people, events, time, cause–effect, etc.",9.5,10,5.3,"Max"],["評量延伸","Extended Assessment","課外補充參與","Enrichment Participation","參加夏令營、中文比賽、社區服務等","Joins camps, contests, community service",8.5,9.5,11.8,"Max"],["評量延伸","Extended Assessment","評量反思","Assessment Reflection","學生能自評優勢與改進點，設定下一步學習目標","Self-evaluate strengths/needs; set next-step goals",10,10,0,"Max"],["詞彙‧語法","Vocabulary & Grammar","詞彙量","Vocabulary Range","高頻詞掌握、多義詞運用、近義／反義辨析","Master high-frequency words, use polysemy, distinguish synonyms/antonyms",9,10,11.1,"Max"],["詞彙‧語法","Vocabulary & Grammar","語法準確度","Grammatical Accuracy","時態、量詞、介詞、助詞使用恰當","Correct use of aspect/tense, classifiers, prepositions, particles",9,10,11.1,"Max"],["閱讀","Reading","閱讀理解","Reading Comprehension","能概括主旨、推論隱含信息、分辨事實與觀點","Summarize main idea, infer implicit info, distinguish fact vs. opinion",6,8,33.3,"9"],["閱讀","Reading","閱讀速度","Reading Speed","每分鐘識字／字數，隨年級逐步提高","Characters or words per minute; incremental by grade",5.5,8,45.5,"9"]];
+        rows    = [["出席與紀律","Attendance & Conduct","出席率","Attendance Rate","到課準時、請假事前告知","Punctual attendance; prior notice for absences",9,10,11.1,"Max"],["出席與紀律","Attendance & Conduct","課堂參與","Class Participation","舉手發言、課堂練習投入度、專注力","Raises hand, engages in tasks, stays focused",8.5,9.5,11.8,"Max"],["口語","Speaking","口語流利度","Speaking Fluency","說話連貫度、停頓時間、語速與節奏","Flow, pause length, speed, and rhythm of speech",10,10,0,"Max"],["口語","Speaking","發音與聲調","Pronunciation & Tones","四聲、兒化、輕聲等準確度；易混聲母韻母辨識","Accuracy of four tones, retroflex/neutral tone; distinguish confusing initials/finals",10,10,0,"Max"],["口語","Speaking","會話互動","Interactive Conversation","能提問、應答、接續話題並使用禮貌用語","Ask, respond, sustain topic, use polite expressions",9,10,11.1,"Max"],["學習態度","Learning Attitude","作業完成度","Homework Completion","準時繳交、正確率、自我修訂意願","On-time submission, accuracy, willingness to self-edit",9.5,10,5.3,"Max"],["學習態度","Learning Attitude","自主學習","Self-directed Learning","主動預習複習、使用中文 App 或閱讀課外書","Proactive preview/review; uses Chinese apps or extra reading",8.5,10,17.6,"Max"],["學習態度","Learning Attitude","家庭參與","Family Involvement","家長共讀、家庭中文對話頻率、家庭作業支持","Parent-child reading, home Chinese conversation, homework support",10,10,0,"Max"],["寫作","Writing","字形筆順","Character Formation","筆畫正確、結構端正、書寫整潔度","Correct stroke order, balanced structure, neatness",8,9,12.5,"9.5"],["寫作","Writing","句型運用","Sentence Patterns","正確使用並變化基本句式（把、被、連動、比較等）","Accurate and varied use of basic patterns (ba-construction, passive, serial verbs, comparisons)",7.5,9.5,26.7,"Max"],["寫作","Writing","段落組織","Paragraph Organization","主題句、過渡詞、結尾呼應；篇章邏輯","Topic sentence, transitions, closure; logical flow",5.5,9,63.6,"9.5"],["寫作","Writing","創意表達","Creative Expression","能在小作文加入感受、例子或修辭，展現個人風格","Add feelings, examples, rhetorical devices; show personal voice",6.5,9,38.5,"9.5"],["文化與品德","Culture & Character","中華文化知識","Chinese-Culture Knowledge","節慶、歷史人物、地理常識與相關禮俗","Festivals, historical figures, geography, customs",9.5,10,5.3,"Max"],["文化與品德","Culture & Character","文化參與度","Cultural Participation","積極投入節慶活動、社團或課外文化專案","Active in festivals, clubs, or cultural projects",10,10,0,"Max"],["文化與品德","Culture & Character","品德與合作","Character & Teamwork","尊重同儕、團隊協作、服務學習參與","Respect peers, cooperate in teams, join service-learning",10,10,0,"Max"],["聽力","Listening","聽力理解","Listening Comprehension","能聽懂課堂指令、日常對話、素材（影片／故事）大意與細節","Understand classroom directions, everyday dialogue, and main ideas + details in audio/video or stories",9.5,10,5.3,"Max"],["聽力","Listening","關鍵訊息擷取","Key-Information Extraction","能抓住「人物、事件、時間、因果」等要點並筆記","Identify and note people, events, time, cause–effect, etc.",9.5,10,5.3,"Max"],["評量延伸","Extended Assessment","課外補充參與","Enrichment Participation","參加夏令營、中文比賽、社區服務等","Joins camps, contests, community service",8.5,9.5,11.8,"Max"],["評量延伸","Extended Assessment","評量反思","Assessment Reflection","學生能自評優勢與改進點，設定下一步學習目標","Self-evaluate strengths/needs; set next-step goals",10,10,0,"Max"],["詞彙‧語法","Vocabulary & Grammar","詞彙量","Vocabulary Range","高頻詞掌握、多義詞運用、近義／反義辨析","Master high-frequency words, use polysemy, distinguish synonyms/antonyms",9,10,11.1,"Max"],["詞彙‧語法","Vocabulary & Grammar","語法準確度","Grammatical Accuracy","時態、量詞、介詞、助詞使用恰當","Correct use of aspect/tense, classifiers, prepositions, particles",9,10,11.1,"Max"],["閱讀","Reading","閱讀理解","Reading Comprehension","能概括主旨、推論隱含信息、分辨事實與觀點","Summarize main idea, infer implicit info, distinguish fact vs. opinion",6,9.5,58.3,"Max"],["閱讀","Reading","閱讀速度","Reading Speed","每分鐘識字／字數，隨年級逐步提高","Characters or words per minute; incremental by grade",5.5,9,63.6,"9.5"]];
         repYear = "2025-2026";
         repStu  = "鄭理恩（Leo）";
         repTea  = "李姿瑩（Ivy Lee）";
-        repCmt  = "理恩是個聰明又有想法的孩子。他的中文底子很好，字彙量豐富，對詞語的理解相當到位，閱讀能力也很強—讀一篇文章，他不只看懂表面意思，還能抓到背後的重點，這在同齡孩子裡是很難得的。\n我特別喜歡他願意分享的那份熱情。課堂上他常常主動跟大家聊他在做的其他事情—足球場上的比賽、正在進行的科展、鋼琴的練習。從他發亮的眼神和滔滔不絕的描述裡，看得出他對生活充滿投入，也很樂於把自己的世界跟大家分享。\n他對結合科學的課程內容特別感興趣，每次上到這類主題，他總是聽得最專注、問得最起勁。這份旺盛的好奇心和求知慾，是推動一個孩子持續成長最珍貴的動力—它會帶著理恩不斷探索、不斷發現，走得又遠又精彩。\n謝謝爸爸媽媽一路的陪伴與栽培。理恩是個充滿潛力的孩子，期待他帶著這份聰慧與好奇，在中文以及更廣的世界裡盡情發揮。\n\nLeo is a bright kid with a mind of his own. His Chinese is really solid — he's got a rich vocabulary, a strong grasp of what words mean, and his reading is excellent. When he reads a passage, he doesn't just catch the surface meaning; he picks up on the deeper points too, which is pretty rare for his age.\nOne thing I really love is how happy he is to share. In class he'll often start telling everyone about the other things he's into — a soccer match he played, a science fair project he's working on, how his piano is coming along. You can see it in his eyes and hear it in the way he goes on and on: he's a kid who throws himself into life, and he loves bringing his world to the rest of us.\nHe's especially drawn to lessons that tie in science. Whenever a topic like that comes up, he's the one listening hardest and asking the most questions. That kind of lively curiosity and hunger to learn is one of the most precious things that keeps a child growing — it's going to carry Leo to keep exploring, keep discovering, and go far in wonderful ways.\nThank you to Mom and Dad for all your support and for everything you've done to nurture him. Leo is a boy full of potential, and I can't wait to see him take that bright mind and curiosity and let it shine — in Chinese, and in the wider world too.";
+        repCmt  = "理恩是個聰明又有想法的孩子。他的中文底子很好，字彙量豐富，對詞語的理解相當到位，閱讀能力也很強——讀一篇文章，他不只看懂表面意思，還能抓到背後的重點，這在同齡孩子裡是很難得的。\n我特別喜歡他願意分享的那份熱情。課堂上他常常主動跟大家聊他在做的其他事情—足球場上的比賽、正在進行的科展、鋼琴的練習。從他發亮的眼神和滔滔不絕的描述裡，看得出他對生活充滿投入，也很樂於把自己的世界跟大家分享。\n他對結合科學的課程內容特別感興趣，每次上到這類主題，他總是聽得最專注、問得最起勁。這份旺盛的好奇心和求知慾，是推動一個孩子持續成長最珍貴的動力—它會帶著理恩不斷探索、不斷發現，走得又遠又精彩。\n也謝謝理恩特地送給我的那些作品，我真的非常喜歡，心裡也很感動。能被孩子這樣記在心上，是當老師最幸福的時刻。謝謝爸爸媽媽一路的陪伴與栽培—理恩是個充滿潛力的孩子，期待他帶著這份聰慧與好奇，在中文以及更廣的世界裡盡情發揮。\n\nLeo is a bright kid with a mind of his own. His Chinese is really solid — he's got a rich vocabulary, a strong grasp of what words mean, and his reading is excellent. When he reads a passage, he doesn't just catch the surface meaning; he picks up on the deeper points too, which is pretty rare for his age.\nOne thing I really love is how happy he is to share. In class he'll often start telling everyone about the other things he's into — a soccer match he played, a science fair project he's working on, how his piano is coming along. You can see it in his eyes and hear it in the way he goes on and on: he's a kid who throws himself into life, and he loves bringing his world to the rest of us.\nHe's especially drawn to lessons that tie in science. Whenever a topic like that comes up, he's the one listening hardest and asking the most questions. That kind of lively curiosity and hunger to learn is one of the most precious things that keeps a child growing — it's going to carry Leo to keep exploring, keep discovering, and go far in wonderful ways.\nI also want to thank Leo for the little works he made and gave to me — I truly love them, and they touched my heart. Being remembered by a student like this is one of the happiest moments of being a teacher. And thank you to Mom and Dad for all your support and care along the way — Leo is a boy full of potential, and I can't wait to see him take that bright mind and curiosity and let it shine, in Chinese and in the wider world too.";
         exams   = [100,100,100,100];
         prevYear   = 2025;
         currYear   = 2026;
