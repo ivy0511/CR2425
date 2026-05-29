@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AAPPL 中文寫作練習（第二版）｜含評分與改進建議</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1410;--paper:#f7f3ec;--paper2:#efe8db;
+  --red:#a8362a;--gold:#b8893a;--jade:#2f6b58;
+  --line:#d9cfbd;--muted:#7d7263;
+}
+body{font-family:'Noto Serif TC',serif;background:var(--paper);color:var(--ink);min-height:100vh;line-height:1.7}
+button{cursor:pointer;font-family:'Noto Sans TC',sans-serif}
+
+/* texture overlay */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(circle at 20% 15%,rgba(184,137,58,0.05),transparent 40%),
+             radial-gradient(circle at 85% 80%,rgba(47,107,88,0.04),transparent 45%);}
+.wrap{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:0 20px}
+
+/* ── HEADER ── */
+header{padding:36px 20px 24px;border-bottom:3px double var(--gold);margin-bottom:0}
+.header-inner{max-width:1040px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:16px}
+.seal{
+  width:60px;height:60px;border:2px solid var(--red);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  color:var(--red);font-weight:900;font-size:13px;font-family:'Noto Serif TC',serif;
+  position:relative;background:rgba(168,54,42,0.04);
+}
+.seal::after{content:'';position:absolute;inset:4px;border:1px solid var(--red);border-radius:50%;opacity:.4}
+.brand h1{font-size:26px;font-weight:900;letter-spacing:1px;line-height:1.2}
+.brand .sub{font-size:13px;color:var(--muted);font-family:'Noto Sans TC',sans-serif;margin-top:3px}
+.version-tag{background:var(--red);color:var(--paper);padding:5px 14px;border-radius:2px;font-size:12px;font-weight:600;font-family:'Noto Sans TC',sans-serif;letter-spacing:1px;align-self:center}
+
+/* ── TASK PICKER ── */
+.picker{padding:28px 20px;background:var(--paper2);border-bottom:1px solid var(--line)}
+.picker-inner{max-width:1040px;margin:0 auto}
+.picker-label{font-size:13px;color:var(--muted);font-family:'Noto Sans TC',sans-serif;margin-bottom:14px;letter-spacing:1px}
+.task-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.task-chip{
+  background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:12px 14px;text-align:left;
+  transition:all .18s;position:relative;overflow:hidden;
+}
+.task-chip:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 18px rgba(26,20,16,0.08)}
+.task-chip.active{border-color:var(--red);background:rgba(168,54,42,0.05);box-shadow:inset 0 0 0 1px var(--red)}
+.task-chip .lv{font-size:10px;font-weight:700;font-family:'Noto Sans TC',sans-serif;letter-spacing:1px;padding:2px 7px;border-radius:2px;display:inline-block;margin-bottom:6px}
+.lv-i{background:rgba(47,107,88,0.12);color:var(--jade)}
+.lv-a{background:rgba(168,54,42,0.12);color:var(--red)}
+.task-chip .t-title{font-size:14px;font-weight:600;margin-bottom:2px}
+.task-chip .t-topic{font-size:11px;color:var(--muted);font-family:'Noto Sans TC',sans-serif}
+
+/* ── MAIN ── */
+main{padding:32px 20px 60px}
+.main-inner{max-width:1040px;margin:0 auto}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media(max-width:840px){.layout{grid-template-columns:1fr}}
+
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.panel-head{padding:14px 20px;background:var(--ink);color:var(--paper);font-family:'Noto Sans TC',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;display:flex;align-items:center;gap:8px}
+.panel-body{padding:22px}
+
+/* prompt */
+.prompt-meta{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.meta-pill{font-size:11px;font-family:'Noto Sans TC',sans-serif;padding:3px 10px;border-radius:2px;border:1px solid var(--line);color:var(--muted)}
+.prompt-title{font-size:21px;font-weight:700;margin-bottom:16px;color:var(--red)}
+.section-label{font-size:11px;font-weight:700;font-family:'Noto Sans TC',sans-serif;letter-spacing:2px;color:var(--gold);margin-bottom:8px;text-transform:uppercase}
+.context{font-size:15px;line-height:1.9;margin-bottom:20px;padding-left:14px;border-left:3px solid var(--gold)}
+.task-req{background:var(--paper2);border-radius:4px;padding:16px 18px;margin-bottom:18px}
+.task-req p{font-size:14.5px;line-height:2;margin:2px 0}
+.spec-row{display:flex;gap:12px}
+.spec{flex:1;text-align:center;padding:10px;border:1px dashed var(--line);border-radius:4px}
+.spec .s-lbl{font-size:11px;color:var(--muted);font-family:'Noto Sans TC',sans-serif}
+.spec .s-val{font-size:16px;font-weight:700;color:var(--jade);margin-top:2px}
+
+/* writing */
+.write-stats{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.write-stats .lbl{font-size:13px;color:var(--muted);font-family:'Noto Sans TC',sans-serif}
+.cc{font-family:'Noto Sans TC',sans-serif;font-size:12px;padding:3px 12px;border-radius:14px;border:1px solid var(--line);color:var(--muted);transition:all .3s}
+.cc.ok{background:rgba(47,107,88,0.1);border-color:var(--jade);color:var(--jade)}
+textarea{
+  width:100%;min-height:340px;padding:18px;font-size:16px;line-height:2.1;
+  border:1px solid var(--line);border-radius:4px;outline:none;resize:vertical;
+  font-family:'Noto Serif TC',serif;color:var(--ink);background:#fffdf9;
+  background-image:repeating-linear-gradient(transparent,transparent 41px,rgba(217,207,189,0.4) 41px,rgba(217,207,189,0.4) 42px);
+  transition:border-color .2s;
+}
+textarea:focus{border-color:var(--red)}
+.btn-row{display:flex;gap:10px;margin-top:16px}
+.btn{flex:1;padding:14px;border:none;border-radius:4px;font-size:15px;font-weight:700;font-family:'Noto Sans TC',sans-serif;letter-spacing:1px;transition:all .2s}
+.btn-grade{background:var(--red);color:var(--paper)}
+.btn-grade:hover{background:#8e2c22;transform:translateY(-1px)}
+.btn-clear{flex:0 0 auto;background:transparent;border:1px solid var(--line);color:var(--muted);padding:14px 20px}
+.btn-clear:hover{border-color:var(--ink);color:var(--ink)}
+.btn-model{flex:0 0 auto;background:transparent;border:1px solid var(--gold);color:var(--gold);padding:14px 20px}
+.btn-model:hover{background:rgba(184,137,58,0.08)}
+
+/* ── RESULTS ── */
+.results{margin-top:32px;display:none}
+.results.show{display:block;animation:fadein .4s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.score-banner{
+  background:var(--ink);color:var(--paper);border-radius:6px;padding:28px 32px;
+  display:flex;align-items:center;gap:32px;margin-bottom:24px;flex-wrap:wrap;
+}
+.score-big{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.score-grade{font-size:52px;font-weight:900;line-height:1;color:var(--gold)}
+.score-band{font-size:13px;font-family:'Noto Sans TC',sans-serif;color:rgba(247,243,236,0.6);margin-top:6px;letter-spacing:2px}
+.score-divider{width:1px;align-self:stretch;background:rgba(247,243,236,0.2)}
+.score-summary{flex:1;min-width:200px}
+.score-summary h3{font-size:16px;font-family:'Noto Sans TC',sans-serif;margin-bottom:8px;color:var(--gold)}
+.score-summary p{font-size:14px;line-height:1.8;color:rgba(247,243,236,0.85)}
+
+.dim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px}
+.dim-card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px}
+.dim-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.dim-name{font-size:13px;font-weight:600;font-family:'Noto Sans TC',sans-serif}
+.dim-score{font-size:13px;font-weight:700;font-family:'Noto Sans TC',sans-serif}
+.dim-bar{height:6px;background:var(--paper2);border-radius:3px;overflow:hidden}
+.dim-fill{height:100%;border-radius:3px;transition:width .8s ease}
+.dim-note{font-size:12px;color:var(--muted);font-family:'Noto Sans TC',sans-serif;margin-top:8px;line-height:1.6}
+
+.feedback-block{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:24px;margin-bottom:20px}
+.fb-title{font-size:15px;font-weight:700;font-family:'Noto Sans TC',sans-serif;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+.fb-list{list-style:none}
+.fb-list li{font-size:14px;line-height:1.9;padding:8px 0 8px 26px;position:relative;border-bottom:1px dashed var(--line)}
+.fb-list li:last-child{border-bottom:none}
+.fb-list li::before{position:absolute;left:0;top:8px;font-family:'Noto Sans TC',sans-serif;font-weight:700}
+.fb-good li::before{content:'✓';color:var(--jade)}
+.fb-improve li::before{content:'→';color:var(--red)}
+.fb-detected{font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--jade);background:rgba(47,107,88,0.08);padding:1px 7px;border-radius:2px;margin-left:4px}
+
+.model-block{background:rgba(184,137,58,0.06);border:1px solid var(--gold);border-radius:6px;padding:24px;margin-bottom:20px;display:none}
+.model-block.show{display:block;animation:fadein .4s ease}
+.model-block .fb-title{color:var(--gold)}
+.model-text{font-size:15px;line-height:2.1;white-space:pre-wrap}
+.model-text .ph{background:rgba(47,107,88,0.12);padding:0 2px;border-radius:2px}
+
+.disclaimer{font-size:12px;color:var(--muted);font-family:'Noto Sans TC',sans-serif;text-align:center;line-height:1.8;padding:20px;border-top:1px solid var(--line);margin-top:10px}
+
+@media(max-width:600px){
+  .brand h1{font-size:21px}
+  .score-banner{padding:20px;gap:18px}
+  .score-grade{font-size:40px}
+  .panel-body{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="seal">寫作<br>練習</div>
+      <div>
+        <h1>AAPPL 中文寫作練習</h1>
+        <div class="sub">Presentational Writing｜含自動評分與改進建議</div>
+      </div>
+    </div>
+    <span class="version-tag">第二版 · VER.2</span>
+  </div>
+</header>
+
+<div class="picker">
+  <div class="picker-inner">
+    <div class="picker-label">選擇題目 — 共 8 題（4 中級 ＋ 4 高級，全新題組）</div>
+    <div class="task-grid" id="task-grid"></div>
+  </div>
+</div>
+
+<main>
+  <div class="main-inner">
+    <div class="layout">
+      <!-- PROMPT -->
+      <div class="panel">
+        <div class="panel-head">📜 題目</div>
+        <div class="panel-body" id="prompt-body"></div>
+      </div>
+      <!-- WRITING -->
+      <div class="panel">
+        <div class="panel-head">✍️ 作答區</div>
+        <div class="panel-body">
+          <div class="write-stats">
+            <span class="lbl">在此輸入你的作答：</span>
+            <span class="cc" id="char-count">漢字 0</span>
+          </div>
+          <textarea id="answer" placeholder="請切換至中文輸入法後開始書寫……"></textarea>
+          <div class="btn-row">
+            <button class="btn btn-grade" onclick="gradeAnswer()">評分與建議 →</button>
+            <button class="btn btn-model" onclick="toggleModel()">範文</button>
+            <button class="btn btn-clear" onclick="clearAnswer()">清除</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results" id="results">
+      <div class="score-banner">
+        <div class="score-big">
+          <div class="score-grade" id="grade">—</div>
+          <div class="score-band" id="band">預估等級</div>
+        </div>
+        <div class="score-divider"></div>
+        <div class="score-summary">
+          <h3 id="summary-title">整體評語</h3>
+          <p id="summary-text"></p>
+        </div>
+      </div>
+
+      <div class="dim-grid" id="dim-grid"></div>
+
+      <div class="feedback-block">
+        <div class="fb-title">✅ 做得好的地方</div>
+        <ul class="fb-list fb-good" id="fb-good"></ul>
+      </div>
+
+      <div class="feedback-block">
+        <div class="fb-title">→ 可以改進的方向</div>
+        <ul class="fb-list fb-improve" id="fb-improve"></ul>
+      </div>
+
+      <div class="model-block" id="model-block">
+        <div class="fb-title">📖 高分範文參考</div>
+        <div class="model-text" id="model-text"></div>
+      </div>
+
+      <div class="disclaimer">
+        本工具使用語言特徵分析（字數、段落、連接詞、句型、詞彙、標點）提供即時參考評估，<br>
+        實際 AAPPL 成績須由 ACTFL 認證評分員人工評定。建議搭配中文老師的回饋使用。
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+// ════ TASK DATA ════
+const TASKS = [
+  // ── INTERMEDIATE ──
+  { level:"I", topic:"日常生活", title:"邀請朋友",
+    context:"你想邀請一位朋友這個週末一起出去玩。請寫一則訊息給他。",
+    req:["說明你想邀請他去哪裡、做什麼","告訴他時間和地點","問他方不方便，並請他回覆"],
+    target:"2–3 段", min:80,
+    model:"小傑：\n\n這個週末有空嗎？我最近發現市中心新開了一家很棒的桌遊咖啡廳，聽說有上百種遊戲可以玩，還有好喝的飲料。我想約你這個星期六下午兩點去那裡，地址我等一下傳給你。\n\n我們可以先玩幾個小時，玩累了再去附近吃晚餐，那一帶有很多好吃的餐廳。如果你願意的話，也可以再找一兩個朋友一起來，人多比較熱鬧！\n\n你那天方便嗎？請早點回覆我，我好先訂位。期待跟你見面！" },
+
+  { level:"I", topic:"學校生活", title:"自我介紹信",
+    context:"新學期開始，中文老師請每位同學寫一封自我介紹信，讓老師更認識你。",
+    req:["介紹你的基本資料（姓名、年級、興趣）","說說你為什麼學中文","談談你對這學期的期待或目標"],
+    target:"2–3 段", min:80,
+    model:"老師您好：\n\n我叫陳安琪，今年讀九年級。我平常最喜歡的活動是打籃球和畫畫，週末常常和朋友一起去公園運動。我也很喜歡看電影，特別是動畫片。\n\n我從小就對中文很有興趣，因為我的外婆是台灣人，每次跟她說中文都讓我覺得很親切。我希望能把中文學得更好，將來可以順利地跟台灣的家人聊天，也能讀懂中文的故事書。\n\n這個學期我給自己訂了一個目標，就是每天至少寫五個句子的中文日記。希望老師能多多指導我，謝謝您！\n\n學生 陳安琪 敬上" },
+
+  { level:"I", topic:"飲食文化", title:"介紹一道菜",
+    context:"班上要做一本「我們的家常菜」食譜，老師請你介紹一道你家常吃的菜。",
+    req:["說出這道菜的名稱","介紹主要的材料","簡單說明做法，並說說你為什麼喜歡它"],
+    target:"2–3 段", min:80,
+    model:"我想介紹一道我家最常吃的菜——番茄炒蛋。這是一道很簡單但是非常好吃的家常菜，幾乎每個星期我媽媽都會做一次。\n\n做這道菜需要的材料很簡單，只要番茄、雞蛋、一點點鹽和糖就可以了。首先把雞蛋打散，下鍋炒到半熟先盛起來；接著炒番茄，等番茄出汁以後，再把雞蛋倒回去一起炒，最後加一點鹽和糖調味就完成了。\n\n我很喜歡這道菜，因為它酸酸甜甜的，配白飯特別好吃。而且它讓我想起小時候媽媽在廚房忙碌的樣子，每次吃都覺得很溫暖。" },
+
+  { level:"I", topic:"旅遊經驗", title:"難忘的旅行",
+    context:"中文課要分享「我最難忘的一次旅行」，請寫下你的經歷。",
+    req:["說明你去了哪裡、和誰一起去","描述你在那裡做了什麼","說說為什麼這次旅行讓你難忘"],
+    target:"2–3 段", min:80,
+    model:"去年暑假，我和家人一起去了台灣旅行，那是我第一次回到爸爸媽媽長大的地方，所以特別難忘。\n\n我們在台灣待了兩個星期，去了很多地方。白天我們會去逛夜市、爬山、看海，晚上就回阿公阿嬤家吃飯聊天。我最喜歡的是去九份，那裡的老街又熱鬧又漂亮，我還吃到了很好吃的芋圓。\n\n這次旅行讓我難忘，不只是因為風景很美，更因為我終於見到了從來沒見過的家人。雖然我的中文不太流利，但是我們還是聊得很開心。我真希望以後還能再回去。" },
+
+  // ── ADVANCED ──
+  { level:"A", topic:"科技與社會", title:"手機與青少年",
+    context:"一份青少年雜誌正在徵稿，主題是「智慧型手機對青少年生活的影響」。請投稿一篇評論文章。",
+    req:["分析手機帶來的正面與負面影響","舉出具體的例子或情境","提出你認為平衡使用的方法","文章需有清楚的段落結構與結論"],
+    target:"3–4 段", min:150,
+    model:"智慧型手機已經成為現代青少年生活中不可或缺的一部分。它像一把雙面刃，在帶來便利的同時，也悄悄改變著我們的生活方式。\n\n不可否認，手機為我們的學習與生活提供了極大的幫助。透過手機，我們可以隨時查詢資料、與遠方的朋友保持聯繫，甚至參加線上課程。舉例來說，疫情期間，正是這些科技工具讓我們的學習沒有中斷。\n\n然而，過度依賴手機的問題也日益嚴重。許多同學熬夜滑手機，導致睡眠不足、上課精神不濟；更有人沉迷於社群媒體上的「按讚」數字，因而產生焦慮與自卑。當面對面的交談被冰冷的螢幕取代，人與人之間真實的情感連結也在慢慢流失。\n\n我認為，關鍵不在於完全拒絕手機，而在於學會聰明地使用它。我們可以為自己設定使用時間、在用餐和睡前放下手機，把更多時間留給家人、朋友和真實的世界。唯有如此，科技才能真正成為我們的幫手，而不是主人。" },
+
+  { level:"A", topic:"文化與認同", title:"傳統節日的意義",
+    context:"你受邀為一個跨文化交流網站撰寫文章，向外國讀者介紹一個對你有特別意義的傳統節日，並探討傳統在現代社會中的價值。",
+    req:["介紹這個節日的由來與習俗","分享你個人與這個節日的連結","探討傳統節日在現代社會中為什麼仍然重要","語言需有層次，並使用適當的論述句型"],
+    target:"3–4 段", min:150,
+    model:"在眾多傳統節日當中，農曆新年對我有著最深刻的意義。它不僅是華人最重要的節日，更承載著一個民族對家庭與希望的共同記憶。\n\n農曆新年的由來已有數千年的歷史，相傳是為了驅趕一隻叫「年」的怪獸。因此，人們會貼紅色的春聯、放鞭炮，並聚在一起守歲。時至今日，這些習俗依然延續著，紅色象徵著喜慶與好運，而圍爐團圓則代表著家人的凝聚。\n\n對我而言，新年最珍貴的不是紅包或美食，而是全家人團聚的那份溫暖。無論平時大家多麼忙碌，到了除夕夜，所有人都會放下手邊的事，回到家中一起吃年夜飯。那一刻，我才真切地感受到自己的根在哪裡。\n\n在這個全球化、生活步調飛快的時代，傳統節日的價值更顯珍貴。它像一條無形的線，把分散各地的家人重新連結起來，也提醒著年輕一代不要遺忘自己從何而來。我相信，只要這份情感還在，傳統就永遠不會過時。" },
+
+  { level:"A", topic:"環境議題", title:"塑膠污染",
+    context:"你所在城市的環保社團正在舉辦徵文活動，主題為「我們能為減少塑膠污染做些什麼」。請撰寫一篇呼籲行動的文章。",
+    req:["說明塑膠污染目前造成的問題","分析個人與社會可以採取的行動","回應「一個人的力量太小」這種看法","以具有說服力的結論收尾"],
+    target:"3–4 段", min:150,
+    model:"走在海邊，本該欣賞美麗的浪花，如今映入眼簾的卻常常是漂浮的塑膠袋與寶特瓶。塑膠污染早已不是遙遠的環境新聞，而是迫在眉睫的危機。\n\n塑膠的危害遠比我們想像的嚴重。它需要數百年才能分解，過程中還會碎裂成「微塑膠」，進入海洋生物的體內，最終透過食物鏈回到人類的餐桌上。換句話說，我們丟棄的每一個塑膠製品，最後都可能以另一種形式回到自己身上。\n\n或許有人會說：「我一個人少用塑膠，根本改變不了什麼。」然而，這種想法正是問題所在。如果每個人都這麼想，污染只會愈來愈嚴重；相反地，如果每個人都願意自備購物袋、拒絕一次性餐具，無數個微小的行動匯聚起來，就能形成改變的洪流。\n\n保護環境從來不是某個人或某個組織的責任，而是我們共同的使命。改變，往往就從放下手中那個塑膠袋的瞬間開始。讓我們從今天做起，為自己、也為下一代，留下一片乾淨的土地與海洋。" },
+
+  { level:"A", topic:"教育與未來", title:"理想的學習方式",
+    context:"教育論壇邀請學生分享觀點，主題是「對我而言，最理想的學習方式是什麼」。請發表你的看法。",
+    req:["描述你心目中理想的學習方式","說明為什麼這種方式對你最有效","比較它與傳統學習方式的差異","提出你對未來教育的期望"],
+    target:"3–4 段", min:150,
+    model:"如果問我什麼是最理想的學習方式，我的答案是「在實踐中學習」。對我來說，真正的理解不是來自死記硬背，而是來自親身去做、去嘗試、甚至去犯錯。\n\n我之所以偏好這種方式，是因為它讓知識變得鮮活。舉例來說，與其反覆背誦化學公式，我更希望能走進實驗室，親眼看著兩種液體混合後產生的變化。當知識和真實的體驗連結在一起時，它便深深地刻在我的記憶裡，再也不容易忘記。\n\n這與傳統的學習方式有很大的不同。傳統課堂往往以老師講授、學生聽寫為主，學生比較被動。而實踐式的學習則把主導權交還給學生，鼓勵我們主動發問、動手探索。雖然這種方式可能比較花時間，但我相信，它培養的思考能力與創造力，是任何考試分數都無法衡量的。\n\n我期待未來的教育能給學生更多動手與探索的空間，少一點標準答案，多一點開放的可能。畢竟，教育的目的不該只是培養會考試的人，而是培養懂得思考、勇於創造的下一代。" }
+];
+
+// connector / transition words for detection
+const CONNECTORS = ["因為","所以","但是","可是","不過","雖然","然而","而且","並且","另外","此外","首先","其次","接著","然後","最後","總之","換句話說","舉例來說","例如","比如","相反","一方面","另一方面","不僅","而是","由於","因此","於是","儘管","即使","不但","甚至","反而","其實","當然","事實上","綜上所述","由此可見","值得一提","正因如此"];
+const ADV_CONNECTORS = ["然而","換句話說","舉例來說","一方面","另一方面","不僅","儘管","即使","甚至","反而","事實上","綜上所述","由此可見","正因如此","相反地","值得一提"];
+
+let currentTask = 0;
+
+// ── RENDER ──
+function renderPicker(){
+  const grid=document.getElementById('task-grid');
+  grid.innerHTML='';
+  TASKS.forEach((t,i)=>{
+    const chip=document.createElement('button');
+    chip.className='task-chip'+(i===currentTask?' active':'');
+    chip.onclick=()=>selectTask(i);
+    chip.innerHTML=`<span class="lv ${t.level==='A'?'lv-a':'lv-i'}">${t.level==='A'?'ADVANCED':'INTERMEDIATE'}</span>
+      <div class="t-title">${i+1}. ${t.title}</div>
+      <div class="t-topic">${t.topic}</div>`;
+    grid.appendChild(chip);
+  });
+}
+
+function renderPrompt(){
+  const t=TASKS[currentTask];
+  const isAdv=t.level==='A';
+  document.getElementById('prompt-body').innerHTML=`
+    <div class="prompt-meta">
+      <span class="meta-pill" style="border-color:${isAdv?'var(--red)':'var(--jade)'};color:${isAdv?'var(--red)':'var(--jade)'}">${isAdv?'Advanced 高級':'Intermediate 中級'}</span>
+      <span class="meta-pill">${t.topic}</span>
+    </div>
+    <div class="prompt-title">${t.title}</div>
+    <div class="section-label">情境</div>
+    <div class="context">${t.context}</div>
+    <div class="section-label">寫作任務</div>
+    <div class="task-req">${t.req.map(r=>`<p>・${r}</p>`).join('')}</div>
+    <div class="spec-row">
+      <div class="spec"><div class="s-lbl">建議長度</div><div class="s-val">${t.target}</div></div>
+      <div class="spec"><div class="s-lbl">建議漢字</div><div class="s-val">${t.min}+ 字</div></div>
+      <div class="spec"><div class="s-lbl">建議時間</div><div class="s-val">7–10 分</div></div>
+    </div>`;
+}
+
+function selectTask(i){
+  currentTask=i;
+  renderPicker();
+  renderPrompt();
+  clearAnswer();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function clearAnswer(){
+  document.getElementById('answer').value='';
+  updateCount();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('model-block').classList.remove('show');
+}
+
+// ── COUNT ──
+function countChinese(s){return (s.match(/[\u4e00-\u9fa5\u3400-\u4dbf]/g)||[]).length;}
+function updateCount(){
+  const txt=document.getElementById('answer').value;
+  const n=countChinese(txt);
+  const cc=document.getElementById('char-count');
+  cc.textContent='漢字 '+n;
+  cc.classList.toggle('ok',n>=TASKS[currentTask].min);
+}
+document.getElementById('answer').addEventListener('input',updateCount);
+
+// ════ SCORING ENGINE ════
+function gradeAnswer(){
+  const t=TASKS[currentTask];
+  const txt=document.getElementById('answer').value.trim();
+  const chinese=countChinese(txt);
+
+  if(chinese<10){
+    alert('請先輸入你的作答內容，再進行評分。');
+    return;
+  }
+
+  const isAdv=t.level==='A';
+
+  // ── DIMENSION 1: Length (字數) ──
+  const lenRatio=chinese/t.min;
+  let lenScore = lenRatio>=1.2?100 : lenRatio>=1?92 : lenRatio>=0.8?78 : lenRatio>=0.6?60 : lenRatio>=0.4?40 : 25;
+  let lenNote = lenRatio>=1 ? `已達建議字數（${chinese} 字）` : `目前 ${chinese} 字，建議至少 ${t.min} 字`;
+
+  // ── DIMENSION 2: Structure (段落結構) ──
+  const paras=txt.split(/\n+/).filter(p=>countChinese(p)>=10);
+  const paraCount=paras.length;
+  const wantPara=isAdv?3:2;
+  let structScore = paraCount>=wantPara+1?100 : paraCount>=wantPara?90 : paraCount>=wantPara-1?70 : 45;
+  let structNote = paraCount>=wantPara ? `分為 ${paraCount} 段，結構清晰` : `目前約 ${paraCount} 段，建議分成 ${wantPara}–${wantPara+1} 段`;
+
+  // ── DIMENSION 3: Connectors (連接詞) ──
+  const foundConn=[...new Set(CONNECTORS.filter(c=>txt.includes(c)))];
+  const foundAdvConn=[...new Set(ADV_CONNECTORS.filter(c=>txt.includes(c)))];
+  const connWant=isAdv?4:2;
+  const connCount=foundConn.length;
+  let connScore = connCount>=connWant+2?100 : connCount>=connWant?88 : connCount>=connWant-1?68 : connCount>=1?50 : 30;
+  let connNote = connCount>0 ? `用了 ${connCount} 種連接詞` : '幾乎沒有使用連接詞';
+
+  // ── DIMENSION 4: Sentence variety (句型多樣) ──
+  const sentences=txt.split(/[。！？!?]/).filter(s=>countChinese(s)>=3);
+  const sentCount=sentences.length;
+  const avgLen=sentCount>0?chinese/sentCount:0;
+  const hasQuestion=/[？?]/.test(txt);
+  const hasExclaim=/[！!]/.test(txt);
+  let varScore=70;
+  if(sentCount>=5) varScore+=10;
+  if(avgLen>=12 && avgLen<=30) varScore+=12; else if(avgLen>30) varScore-=8;
+  if(hasQuestion) varScore+=4;
+  if(hasExclaim) varScore+=4;
+  varScore=Math.min(100,Math.max(35,varScore));
+  let varNote = sentCount>0 ? `約 ${sentCount} 句，平均每句 ${Math.round(avgLen)} 字` : '句子偏少';
+  if(avgLen>32) varNote+='（句子偏長，可適度斷句）';
+
+  // ── DIMENSION 5: Vocabulary richness (詞彙豐富) ──
+  const uniqueChars=new Set(txt.match(/[\u4e00-\u9fa5\u3400-\u4dbf]/g)||[]).size;
+  const richness=chinese>0?uniqueChars/chinese:0;
+  let vocabScore = richness>=0.62?100 : richness>=0.55?90 : richness>=0.48?78 : richness>=0.4?62 : 45;
+  let vocabNote = `用字多樣度 ${Math.round(richness*100)}%（不重複字 ${uniqueChars} 個）`;
+
+  // ── DIMENSION 6: Punctuation (標點) ──
+  const fullPunct=(txt.match(/[，。！？；：、「」『』（）]/g)||[]).length;
+  const halfPunct=(txt.match(/[,\.!?;:]/g)||[]).length;
+  const endPunct=/[。！？」』]\s*$/.test(txt);
+  let punctScore=60;
+  if(fullPunct>=sentCount*0.8) punctScore+=25; else if(fullPunct>=sentCount*0.5) punctScore+=12;
+  if(halfPunct>fullPunct && halfPunct>2) punctScore-=25;  // using English punctuation
+  if(endPunct) punctScore+=10;
+  punctScore=Math.min(100,Math.max(30,punctScore));
+  let punctNote = halfPunct>fullPunct&&halfPunct>2 ? '注意：應使用全形中文標點（，。？！）' : (fullPunct>=sentCount*0.5?'標點使用大致正確':'標點偏少');
+
+  // ── WEIGHTED TOTAL ──
+  const weights=isAdv
+    ? {len:0.15,struct:0.2,conn:0.2,var:0.15,vocab:0.18,punct:0.12}
+    : {len:0.2,struct:0.18,conn:0.15,var:0.15,vocab:0.17,punct:0.15};
+  const total = Math.round(
+    lenScore*weights.len + structScore*weights.struct + connScore*weights.conn +
+    varScore*weights.var + vocabScore*weights.vocab + punctScore*weights.punct
+  );
+
+  // ── MAP TO ACTFL BAND ──
+  let grade, band, summaryTitle, summaryText;
+  if(isAdv){
+    if(total>=88){grade='A-1';band='高級 ADVANCED';summaryTitle='接近高級水準！';summaryText='你的文章展現了清楚的段落層次、豐富的連接詞與多樣的句型，已具備 Advanced 程度的特徵。再加強用字的精準度，就更出色了。';}
+    else if(total>=72){grade='I-5';band='中級高階';summaryTitle='中級高階，接近高級';summaryText='整體表現不錯，已能寫出有組織的段落。若想達到 Advanced，建議加入更多論述性的連接詞，並讓論點的層次更分明。';}
+    else if(total>=58){grade='I-4';band='中級中階';summaryTitle='中級中階';summaryText='你能完成基本的寫作任務，但段落組織與論述深度還有成長空間。多練習「先提出觀點，再用例子支持」的結構。';}
+    else {grade='I-3';band='中級初階';summaryTitle='繼續努力';summaryText='這是一個好的開始。高級題目需要更長的篇幅、更清楚的段落分工，以及更多元的句型。可先參考範文的結構。';}
+  } else {
+    if(total>=88){grade='I-5';band='中級高階';summaryTitle='表現優異！';summaryText='你的回答完整、組織清楚，用字也很豐富，已達中級高階水準。可以挑戰高級題目了！';}
+    else if(total>=72){grade='I-4';band='中級中階';summaryTitle='中級中階，穩健';summaryText='你能清楚地完成任務，句子也算連貫。多使用一些連接詞，並讓段落分工更明確，就能更上一層。';}
+    else if(total>=58){grade='I-3';band='中級初階';summaryTitle='中級初階';summaryText='你已經能用句子表達想法，很棒！接下來可以練習把句子連接成段落，並增加一些細節。';}
+    else {grade='I-2';band='中級萌芽';summaryTitle='繼續加油';summaryText='你正在進步中。試著把內容寫得更長、更完整，回答題目要求的每一個重點。參考範文會很有幫助。';}
+  }
+
+  // ── RENDER RESULTS ──
+  document.getElementById('grade').textContent=grade;
+  document.getElementById('band').textContent=band;
+  document.getElementById('summary-title').textContent=summaryTitle;
+  document.getElementById('summary-text').textContent=summaryText;
+
+  const dims=[
+    {name:'字數篇幅',score:lenScore,note:lenNote},
+    {name:'段落結構',score:structScore,note:structNote},
+    {name:'連接詞運用',score:connScore,note:connNote},
+    {name:'句型多樣',score:varScore,note:varNote},
+    {name:'詞彙豐富',score:vocabScore,note:vocabNote},
+    {name:'標點正確',score:punctScore,note:punctNote},
+  ];
+  document.getElementById('dim-grid').innerHTML=dims.map(d=>{
+    const color=d.score>=85?'var(--jade)':d.score>=65?'var(--gold)':'var(--red)';
+    return `<div class="dim-card">
+      <div class="dim-head"><span class="dim-name">${d.name}</span><span class="dim-score" style="color:${color}">${d.score}</span></div>
+      <div class="dim-bar"><div class="dim-fill" style="width:${d.score}%;background:${color}"></div></div>
+      <div class="dim-note">${d.note}</div>
+    </div>`;
+  }).join('');
+
+  // ── GOOD POINTS ──
+  const goods=[];
+  if(lenScore>=90) goods.push('內容篇幅充足，完整地展開了想法');
+  if(structScore>=85) goods.push(`段落分明（${paraCount} 段），讓讀者容易跟上你的思路`);
+  if(connScore>=80 && foundConn.length) goods.push(`善用連接詞，使句子之間連貫流暢`+`<span class="fb-detected">偵測到：${foundConn.slice(0,6).join(' / ')}</span>`);
+  if(foundAdvConn.length>=2) goods.push(`使用了高級論述句型`+`<span class="fb-detected">${foundAdvConn.slice(0,4).join(' / ')}</span>`);
+  if(vocabScore>=85) goods.push('用字豐富多元，避免了重複');
+  if(varScore>=85) goods.push('句子長短有變化，讀起來有節奏感');
+  if(hasQuestion && isAdv) goods.push('運用了問句，增加了文章的層次與互動感');
+  if(punctScore>=85) goods.push('標點符號使用正確（全形中文標點）');
+  if(goods.length===0) goods.push('你完成了作答，這是進步的第一步——接下來的建議能幫你寫得更好');
+  document.getElementById('fb-good').innerHTML=goods.map(g=>`<li>${g}</li>`).join('');
+
+  // ── IMPROVEMENTS ──
+  const improves=[];
+  if(lenScore<90) improves.push(`增加篇幅：目前 ${chinese} 字，建議寫到 ${t.min} 字以上，每個任務要點都展開 2–3 句`);
+  if(structScore<85) improves.push(`調整段落：建議分成 ${wantPara}–${wantPara+1} 段，每段聚焦一個重點（例如：開頭→理由→例子→結論）`);
+  if(connScore<80){
+    const suggest=isAdv?'雖然⋯⋯但是、一方面⋯⋯另一方面、舉例來說、換句話說、綜上所述':'因為、所以、然後、而且、最後';
+    improves.push(`多用連接詞：試著加入「${suggest}」等詞語，讓句子更連貫`);
+  }
+  if(isAdv && foundAdvConn.length<2) improves.push('提升論述層次：高級寫作需要「論點＋理由＋例子」的結構，可多用「正因如此」「由此可見」等論述性連接詞');
+  if(varScore<80){
+    if(avgLen>30) improves.push('句子偏長：適度把長句斷成兩三個短句，讀起來會更清楚');
+    else improves.push('增加句型變化：可交替使用長句與短句，並嘗試加入問句或感嘆句');
+  }
+  if(vocabScore<80) improves.push(`豐富用詞：目前用字重複度偏高，試著用同義詞替換，例如「好」可改成「優秀、出色、理想」`);
+  if(punctScore<80){
+    if(halfPunct>fullPunct&&halfPunct>2) improves.push('改用全形標點：中文要用「，。？！」而不是英文的「, . ? !」');
+    else improves.push('注意標點：每個句子結尾要有標點，適時使用逗號斷句');
+  }
+  if(!endPunct) improves.push('文章結尾記得加上句號或適當的結束標點');
+  if(improves.length===0) improves.push('表現很全面！下一步可以挑戰更精緻的修辭，例如譬喻、對比，讓文章更有文采');
+  document.getElementById('fb-improve').innerHTML=improves.map(g=>`<li>${g}</li>`).join('');
+
+  // model text
+  document.getElementById('model-text').textContent=t.model;
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function toggleModel(){
+  const mb=document.getElementById('model-block');
+  const res=document.getElementById('results');
+  if(!res.classList.contains('show')){
+    document.getElementById('model-text').textContent=TASKS[currentTask].model;
+    res.classList.add('show');
+    // hide score parts if just viewing model? keep simple: show everything
+  }
+  mb.classList.toggle('show');
+  if(mb.classList.contains('show')) mb.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// init
+renderPicker();
+renderPrompt();
+updateCount();
+</script>
+</body>
+</html>
