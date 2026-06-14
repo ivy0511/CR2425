@@ -128,7 +128,7 @@
       <button id="prevBtn" class="ic">⟵</button>
       <button class="play" id="playBtn">▶ 播放</button>
       <button id="nextBtn" class="ic">⟶</button>
-      <button class="toggle on" id="autoBtn">連播 開</button>
+      <button class="toggle" id="autoBtn">連播 關</button>
     </div>
     <div class="row2">
       <button class="quiz" id="quizBtn">✍ 換我描寫</button>
@@ -159,7 +159,7 @@ const playBtn = document.getElementById('playBtn');
 const autoBtn = document.getElementById('autoBtn');
 document.getElementById('totNo').textContent = LESSON.length;
 
-let idx = 0, paused = true, autoAdvance = true;
+let idx = 0, paused = true, autoAdvance = false;
 let writer = null, sceneTimer = null, sceneStartTs = 0, sceneRemain = 0, sceneMs = 14000;
 let SPEED = 1, maskReadings = false, quizActive = false;
 let anim = { cancelled:true, raf:0 };
@@ -527,10 +527,10 @@ document.addEventListener('keydown',e=>{
 function init(){
   idx=0; mountScene();          // auto-plays first character
 }
-let _rzT;
-function _refit(){ clearTimeout(_rzT); _rzT=setTimeout(()=>{ if(stage.firstChild) mountScene(); },280); }
+let _rzT, _lastW = window.innerWidth;
+function _refit(){ clearTimeout(_rzT); _rzT=setTimeout(()=>{ const w=window.innerWidth; if(w===_lastW) return; _lastW=w; if(stage.firstChild) mountScene(); },350); }
 window.addEventListener('resize',_refit);
-window.addEventListener('orientationchange',()=>setTimeout(()=>{ if(stage.firstChild) mountScene(); },360));
+window.addEventListener('orientationchange',()=>{ _lastW=null; _refit(); });
 init();
 </script>
 </body>
